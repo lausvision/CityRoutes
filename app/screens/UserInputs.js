@@ -17,7 +17,10 @@ export default class UserInputs extends React.Component {
                <Text style={styles.headerText}>User Inputs</Text>
                </View>
                <ScrollView style={styles.scrollConatainer}></ScrollView>
-                
+            
+            <TouchableOpacity style={styles.discoverButton}> 
+                <Text style={styles.discoverButtonText}>DISCOVER</Text>
+            </TouchableOpacity>
             </View>
 
            
@@ -41,7 +44,25 @@ const styles = StyleSheet.create({
 
     },
     scrollConatainer:{
+        flex:1,
+        marginBottom: 100
+    },
+    discoverButton: {
+        padding: 10,
+        position: 'absolute',
+        bottom: 100,
+        backgroundColor: '#79A9E2',
+        width:300,
+        height:90,
+        borderRadius: 6,
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 8,
 
-    }
+    },
+    discoverButtonText: {
+        color: '#fff',
+        fontSize: 24,
+    },
 
 })
