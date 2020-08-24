@@ -9,18 +9,34 @@ import {
 } from 'react-native';
 
 export default class UserInputs extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.state = {
+            locationArray: [],
+            timeArray: [],
+            budgetArray: [],
+            mobilityArray: [],
+            interestAray: [] 
+        }
+    }
+
     render(){
         return (
             <View style={styles.container}>
                
                <View style={styles.header}>
-               <Text style={styles.headerText}>User Inputs</Text>
+               <Text style={styles.headerText}>User inputs</Text>
                </View>
+
                <ScrollView style={styles.scrollConatainer}></ScrollView>
-            
-            <TouchableOpacity style={styles.discoverButton}> 
+
+                <View style={styles.containerButton}>
+                <TouchableOpacity style={styles.discoverButton}> 
                 <Text style={styles.discoverButtonText}>DISCOVER</Text>
-            </TouchableOpacity>
+                </TouchableOpacity>
+                </View>
+   
             </View>
 
            
@@ -33,7 +49,7 @@ const styles = StyleSheet.create({
         flex:1
     },
     header: {
-
+       
     },
     headerText: {
 
@@ -47,13 +63,19 @@ const styles = StyleSheet.create({
         flex:1,
         marginBottom: 100
     },
+    containerButton: {
+        flex:0,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     discoverButton: {
-        padding: 10,
-        position: 'absolute',
-        bottom: 100,
+
+        flex: 0,
+        justifyContent: 'flex-end',
+        marginBottom: 15,   
         backgroundColor: '#79A9E2',
-        width:300,
-        height:90,
+        width:200,
+        height:50,
         borderRadius: 6,
         alignItems: 'center',
         justifyContent: 'center',
