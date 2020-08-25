@@ -6,6 +6,7 @@ import {
     TextInput,
     ScrollView,
     TouchableOpacity,
+    Button,
 } from 'react-native';
 
 export default class UserInputs extends React.Component {
@@ -27,6 +28,11 @@ export default class UserInputs extends React.Component {
                
                <View style={styles.header}>
                <Text style={styles.headerText}>User inputs</Text>
+              <Button
+              onPress={()=>
+                this.props.navigation.navigate('Routes')}
+                title="hola carambola"
+              ></Button>
                </View>
 
                <ScrollView style={styles.scrollConatainer}></ScrollView>

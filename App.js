@@ -1,15 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
 import UserInputs from './app/screens/UserInputs';
+import Routes from './app/screens/Routes';
 
 export default function App() {
   return (
-    <UserInputs/>
-      
+    <AppNavigator/>
   );
 }
+
+const AppNavigator = StackNavigator({
+  UserInputs: {screen: UserInputs},
+  Routes: {screen: Routes}
+})
 
 const styles = StyleSheet.create({
   container: {
