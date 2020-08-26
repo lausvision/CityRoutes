@@ -1,20 +1,30 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
 import UserInputs from './app/screens/UserInputs';
 import Routes from './app/screens/Routes';
 
 export default function App() {
   return (
-    <AppNavigator/>
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
   );
 }
 
-const AppNavigator = StackNavigator({
-  UserInputs: {screen: UserInputs},
-  Routes: {screen: Routes}
-})
+const Stack = createStackNavigator();
+
+function AppNavigator(){
+  return(
+    <Stack.Navigator>
+      <Stack.Screen name="UserInputs" component={UserInputs} />
+      <Stack.Screen name="Routes" component={Routes} />
+    </Stack.Navigator>
+  )
+}
+
 
 const styles = StyleSheet.create({
   container: {
