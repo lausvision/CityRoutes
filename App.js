@@ -7,6 +7,7 @@ import UserInputs from './app/screens/UserInputs';
 import Routes from './app/screens/Routes';
 import Activity from './app/screens/Activity';
 import Transfer from './app/screens/Transfer';
+import Home from './app/screens/Home';
 
 export default function App() {
   return (
@@ -21,7 +22,8 @@ const Stack = createStackNavigator();
 function AppNavigator(){
   return(
     <Stack.Navigator>
-      <Stack.Screen name="User inputs" component={UserInputs} />
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="UserInputs" component={UserInputs} />
       <Stack.Screen name="Routes" component={Routes} />
       <Stack.Screen name="Activity" component={Activity} />
       <Stack.Screen name="Transfer" component={Transfer} />
