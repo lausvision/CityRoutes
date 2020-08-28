@@ -26,11 +26,30 @@ export default class UserInputs extends React.Component {
         return (
             <View style={styles.container}>
                
-               <View style={styles.header}>
-               <Text style={styles.headerText}>User inputs</Text>
+               <View>
+               
                </View>
 
-               <ScrollView style={styles.scrollConatainer}></ScrollView>
+               <ScrollView style={styles.scrollConatainer}>
+
+               <View>
+               <Text style={styles.bodyText}>Location</Text>
+               </View>
+               <View>
+               <Text style={styles.bodyText}>Time Slot</Text>
+               </View>
+               <View>
+               <Text style={styles.bodyText}>Budget</Text>
+               </View>
+               <View>
+               <Text style={styles.bodyText}>Mobility</Text>
+               </View>
+               <View>
+               <Text style={styles.bodyText}>Interest</Text>
+               </View>
+               
+               
+               </ScrollView>
 
                 <View style={styles.containerButton}>
                 <TouchableOpacity style={styles.discoverButton}
@@ -52,15 +71,12 @@ const styles = StyleSheet.create({
     container: {
         flex:1
     },
-    header: {
-       
-    },
-    headerText: {
+    bodyText: {
 
-        fontSize: 36,
-        padding: 10,
-        lineHeight: 40,
-        lineHeight: 100,
+        fontSize: 18,
+        paddingLeft:30,
+        paddingBottom: 5,
+        paddingTop: 10,
 
     },
     scrollConatainer:{
