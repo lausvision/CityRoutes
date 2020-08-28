@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 
-export default class Routes extends React.Component {
+export default class Activity extends React.Component {
 
 
     render(){
@@ -27,15 +27,11 @@ export default class Routes extends React.Component {
                 </View>
 
 
+                <View>
+               <Text>Come into a world of fresh fruits and vegetables, meats and cheeses, restaurants and a wide variety of specialty shops and services.</Text>
+               </View>
 
-
-                <View style={styles.containerButton}>
-                <TouchableOpacity style={styles.discoverButton}
-                 onPress={()=>
-                    this.props.navigation.navigate('Routes')}> 
-                <Text style={styles.discoverButtonText}>SAVE THE ROUTE</Text>
-                </TouchableOpacity>
-                </View>
+               
    
             </View>
 
