@@ -3,41 +3,37 @@ import {
     StyleSheet,
     Text,
     View,
-    TextInput,
-    ScrollView,
     TouchableOpacity,
-    Button,
 } from 'react-native';
 
-export default class UserInputs extends React.Component {
 
-    constructor(props){
-        super(props);
-        this.state = {
-            locationArray: [],
-            timeArray: [],
-            budgetArray: [],
-            mobilityArray: [],
-            interestAray: [] 
-        }
-    }
+export default class Routes extends React.Component {
+
 
     render(){
         return (
             <View style={styles.container}>
                
                <View style={styles.header}>
-               <Text style={styles.headerText}>User inputs</Text>
+               <Text style={styles.headerText}>name activity</Text>
                </View>
 
-               <ScrollView style={styles.scrollConatainer}></ScrollView>
+               <View style={styles.containerButton}>
+                <TouchableOpacity style={styles.activityButton}
+                 onPress={()=>
+                    this.props.navigation.navigate('Activity')}> 
+                <Text style={styles.activityButtonText}>view more</Text>
+                </TouchableOpacity>
+                </View>
+
+
+
 
                 <View style={styles.containerButton}>
                 <TouchableOpacity style={styles.discoverButton}
-                onPress={()=>
-                    this.props.navigation.navigate('Routes')}
-                > 
-                <Text style={styles.discoverButtonText}>DISCOVER</Text>
+                 onPress={()=>
+                    this.props.navigation.navigate('Routes')}> 
+                <Text style={styles.discoverButtonText}>SAVE THE ROUTE</Text>
                 </TouchableOpacity>
                 </View>
    
@@ -57,15 +53,9 @@ const styles = StyleSheet.create({
     },
     headerText: {
 
-        fontSize: 36,
-        padding: 10,
-        lineHeight: 40,
-        lineHeight: 100,
+        fontSize: 22,
+        padding: 20,
 
-    },
-    scrollConatainer:{
-        flex:1,
-        marginBottom: 100
     },
     containerButton: {
         flex:0,
@@ -78,8 +68,22 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         marginBottom: 15,   
         backgroundColor: '#79A9E2',
-        width:200,
+        width:230,
         height:50,
+        borderRadius: 6,
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 8,
+
+    },
+    activityButton: {
+
+        flex: 0,
+        justifyContent: 'flex-end',
+        marginBottom: 40,   
+        backgroundColor: '#79A9E2',
+        width:260,
+        height:35,
         borderRadius: 6,
         alignItems: 'center',
         justifyContent: 'center',
@@ -89,6 +93,10 @@ const styles = StyleSheet.create({
     discoverButtonText: {
         color: '#fff',
         fontSize: 24,
+    },
+    activityButtonText: {
+        color: '#000',
+        fontSize: 20,
     },
 
 })

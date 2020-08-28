@@ -19,7 +19,7 @@ const Stack = createStackNavigator();
 function AppNavigator(){
   return(
     <Stack.Navigator>
-      <Stack.Screen name="UserInputs" component={UserInputs} />
+      <Stack.Screen name="User inputs" component={UserInputs} />
       <Stack.Screen name="Routes" component={Routes} />
     </Stack.Navigator>
   )

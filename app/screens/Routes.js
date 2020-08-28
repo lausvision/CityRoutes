@@ -15,14 +15,34 @@ export default class Routes extends React.Component {
             <View style={styles.container}>
                
                <View style={styles.header}>
-               <Text style={styles.headerText}>Routes</Text>
+               <Text style={styles.headerText}>Time Schedule</Text>
                </View>
 
-   
+               <View style={styles.containerButton}>
+                <TouchableOpacity style={styles.activityButton}
+                 onPress={()=>
+                    this.props.navigation.navigate('Activity')}> 
+                <Text style={styles.activityButtonText}>ACTIVITY 1</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.activityButton}> 
+                <Text style={styles.activityButtonText}>ACTIVITY 2</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.activityButton}> 
+                <Text style={styles.activityButtonText}>ACTIVITY 3</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.activityButton}> 
+                <Text style={styles.activityButtonText}>ACTIVITY 4</Text>
+                </TouchableOpacity>
+                </View>
+
+
+
 
                 <View style={styles.containerButton}>
-                <TouchableOpacity style={styles.discoverButton}> 
-                <Text style={styles.discoverButtonText}>DISCOVER</Text>
+                <TouchableOpacity style={styles.discoverButton}
+                 onPress={()=>
+                    this.props.navigation.navigate('Routes')}> 
+                <Text style={styles.discoverButtonText}>SAVE THE ROUTE</Text>
                 </TouchableOpacity>
                 </View>
    
@@ -42,11 +62,50 @@ const styles = StyleSheet.create({
     },
     headerText: {
 
-        fontSize: 36,
-        padding: 25,
-        lineHeight: 40,
-        lineHeight: 100,
+        fontSize: 22,
+        padding: 20,
 
+    },
+    containerButton: {
+        flex:0,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    discoverButton: {
+
+        flex: 0,
+        justifyContent: 'flex-end',
+        marginBottom: 15,   
+        backgroundColor: '#79A9E2',
+        width:230,
+        height:50,
+        borderRadius: 6,
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 8,
+
+    },
+    activityButton: {
+
+        flex: 0,
+        justifyContent: 'flex-end',
+        marginBottom: 40,   
+        backgroundColor: '#79A9E2',
+        width:260,
+        height:35,
+        borderRadius: 6,
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 8,
+
+    },
+    discoverButtonText: {
+        color: '#fff',
+        fontSize: 24,
+    },
+    activityButtonText: {
+        color: '#000',
+        fontSize: 20,
     },
 
 })
