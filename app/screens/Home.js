@@ -22,12 +22,14 @@ export default class Home extends React.Component {
             <View style={styles.container}>
             <ImageBackground source={{uri: imageUri}} style={styles.image}>
               <Text style={styles.text}>City Routes</Text>
-              <TouchableOpacity style={styles.guestButton}
+                <View style={styles.containerGuest}>
+                <TouchableOpacity style={styles.guestButton}
                 onPress={()=>
                     this.props.navigation.navigate('UserInputs')}
                 > 
                 <Text style={styles.guestButtonText}>ENTER AS GUEST</Text>
                 </TouchableOpacity>
+                </View>
             </ImageBackground>
 
             <View style={styles.buttonContainer}>
@@ -61,24 +63,25 @@ const styles = StyleSheet.create({
     text: {
       color: "white",
       fontSize: 40,
-      paddingLeft: 135,
+      paddingLeft: 140,
       paddingTop: 35,
       
     },
-    buttonContainer: {
-       flex: 0,
-       flexDirection: 'row',
-       alignItems: 'center',
-       justifyContent: 'center',
-      },
+    containerGuest: {
+        position: 'absolute',
+        bottom: 0,
+        paddingBottom: 20,
+        padding:15
+    },
     guestButton: {
-
+        
         flex: 0,
         justifyContent: 'flex-end',  
         backgroundColor: 'transparent',
-        width:380,
-        height:70,
-        borderRadius: 8,
+        width:360,
+        height:50, 
+        borderWidth: 1, 
+        borderRadius: 4,
         borderColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
@@ -91,6 +94,12 @@ const styles = StyleSheet.create({
         borderColor: '#fff',
         fontWeight: 'bold',
     },
+    buttonContainer: {
+        flex: 0,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+       },
     logInButton: {
 
         flex: 0,
@@ -101,7 +110,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         width:170,
         height:50,
-        borderRadius: 6,
+        borderWidth: 2.5, 
+        borderRadius: 4,
         borderColor: 'black',
         alignItems: 'center',
         justifyContent: 'center',
