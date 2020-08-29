@@ -30,12 +30,15 @@ export default class Home extends React.Component {
                 </TouchableOpacity>
             </ImageBackground>
 
-            <TouchableOpacity style={styles.logInButton}
-                onPress={()=>
-                    this.props.navigation.navigate('UserInputs')}
-                > 
+            <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.logInButton}> 
                 <Text style={styles.logInButtonText}>LOG IN</Text>
-                </TouchableOpacity>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.registerButton}> 
+                <Text style={styles.registerButtonText}>REGISTER</Text>
+            </TouchableOpacity>
+            </View>
+            
 
           </View>
 
@@ -57,30 +60,36 @@ const styles = StyleSheet.create({
     },
     text: {
       color: "white",
-      fontSize: 30,
-      paddingLeft: 130,
-      paddingTop: 40,
+      fontSize: 40,
+      paddingLeft: 135,
+      paddingTop: 35,
       
     },
+    buttonContainer: {
+       flex: 0,
+       flexDirection: 'row',
+       alignItems: 'center',
+       justifyContent: 'center',
+      },
     guestButton: {
 
         flex: 0,
-        justifyContent: 'flex-end',
-        marginBottom: 15,   
+        justifyContent: 'flex-end',  
         backgroundColor: 'transparent',
         width:380,
-        height:50,
-        borderRadius: 6,
+        height:70,
+        borderRadius: 8,
         borderColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
-        elevation: 8,
+        elevation: 5,
 
     },
     guestButtonText: {
         color: 'white',
         fontSize: 15,
-        borderColor: '#fff'
+        borderColor: '#fff',
+        fontWeight: 'bold',
     },
     logInButton: {
 
@@ -90,7 +99,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 10,
         backgroundColor: 'white',
-        width:150,
+        width:170,
         height:50,
         borderRadius: 6,
         borderColor: 'black',
@@ -102,6 +111,30 @@ const styles = StyleSheet.create({
     logInButtonText: {
         color: 'black',
         fontSize: 15,
-        borderColor: '#fff'
+        borderColor: '#fff',
+        fontWeight: 'bold',
+    },
+    registerButton: {
+
+        flex: 0,
+        justifyContent: 'flex-end',
+        marginBottom: 10,
+        marginTop: 10,
+        marginLeft: 10,
+        backgroundColor: 'black',
+        width:170,
+        height:50,
+        borderRadius: 6,
+        borderColor: 'black',
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 8,
+
+    },
+    registerButtonText: {
+        color: 'white',
+        fontSize: 15,
+        borderColor: '#fff',
+        fontWeight: 'bold',
     },
   });
