@@ -21,6 +21,10 @@ export default class UserInputs extends React.Component {
       budgetArray: [],
       mobilityArray: [],
       interestAray: [],
+      taxi: false,
+      bike: false,
+      publicTransport: false,
+      privateTransport: false,
       sightseeing: false,
       typicalFood: false,
       barsandMusic: false,
@@ -118,9 +122,54 @@ export default class UserInputs extends React.Component {
           <View>
             <Text style={styles.bodyText}>Budget</Text>
           </View>
-          <View>
+ 
+          <View style={{flexDirection: 'row', paddingBottom:10}}>
+            <View>
             <Text style={styles.bodyText}>Mobility</Text>
+            </View>
+            
+            <View style={{paddingLeft:30}}>
+            <CardItem>
+            <CheckBox checked={this.state.taxi}
+            onPress={()=> this.setState({
+              taxi: !this.state.taxi})
+              }
+            style={{marginRight:20}}>
+            </CheckBox>
+            <Text>Taxi</Text>
+            </CardItem>
+            
+            <CardItem>
+            <CheckBox checked={this.state.bike}
+            onPress={()=> this.setState({
+              bike: !this.state.bike})}
+            style={{marginRight:20}}>
+            </CheckBox>
+            <Text>Bike</Text>
+            </CardItem>
+            
+            <CardItem>
+            <CheckBox checked={this.state.publicTransport}
+            onPress={()=> this.setState({
+              publicTransport: !this.state.publicTransport})}
+            style={{marginRight:20}}>
+            </CheckBox>
+            <Text>Public Transport</Text>
+            </CardItem>
+            
+            <CardItem>
+            <CheckBox checked={this.state.privateTransport}
+            onPress={()=> this.setState({
+              privateTransport: !this.state.privateTransport})}
+            style={{marginRight:20}}>
+            </CheckBox>
+            <Text>Private trasnport</Text>
+            </CardItem>
+            </View>
+            
+            
           </View>
+
           <View style={{flexDirection: 'row'}}>
             <View>
             <Text style={styles.bodyText}>Interest</Text>
