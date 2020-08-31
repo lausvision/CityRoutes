@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
+import {CheckBox, Card, CardItem} from 'native-base'; 
 import DropDownPicker from "react-native-dropdown-picker";
 
 export default class UserInputs extends React.Component {
@@ -26,7 +27,6 @@ export default class UserInputs extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View></View>
 
         <ScrollView style={styles.scrollConatainer}>
           <View style={styles.inputContainer}>
@@ -116,7 +116,41 @@ export default class UserInputs extends React.Component {
             <Text style={styles.bodyText}>Mobility</Text>
           </View>
           <View>
+          
+            <CardItem>
             <Text style={styles.bodyText}>Interest</Text>
+            <CheckBox checked={false}
+            onPress={()=> this.onePressed()}
+            style={{marginRight:20}}>
+            </CheckBox>
+            <Text>Sightseeing</Text>
+            </CardItem>
+            
+            
+            <CardItem>
+            <CheckBox checked={false}
+            onPress={()=> this.onePressed()}
+            style={{marginRight:20}}>
+            </CheckBox>
+            <Text>Typical food</Text>
+            </CardItem>
+            
+            <CardItem>
+            <CheckBox checked={false}
+            onPress={()=> this.onePressed()}
+            style={{marginRight:20}}>
+            </CheckBox>
+            <Text>Bars and Music</Text>
+            </CardItem>
+            
+            <CardItem>
+            <CheckBox checked={false}
+            onPress={()=> this.onePressed()}
+            style={{marginRight:20}}>
+            </CheckBox>
+            <Text>Nightlife and Party</Text>
+            </CardItem>
+            
           </View>
         </ScrollView>
 
@@ -166,7 +200,6 @@ const styles = StyleSheet.create({
   },
   scrollConatainer: {
     flex: 1,
-    marginBottom: 100,
   },
   containerButton: {
     flex: 0,
