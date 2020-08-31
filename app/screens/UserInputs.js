@@ -21,8 +21,14 @@ export default class UserInputs extends React.Component {
       budgetArray: [],
       mobilityArray: [],
       interestAray: [],
+      sightseeing: false,
+      typicalFood: false,
+      barsandMusic: false,
+      nightlife: false, 
+
     };
   }
+
 
   render() {
     return (
@@ -115,41 +121,50 @@ export default class UserInputs extends React.Component {
           <View>
             <Text style={styles.bodyText}>Mobility</Text>
           </View>
-          <View>
-          
-            <CardItem>
+          <View style={{flexDirection: 'row'}}>
+            <View>
             <Text style={styles.bodyText}>Interest</Text>
-            <CheckBox checked={false}
-            onPress={()=> this.onePressed()}
+            </View>
+            
+            <View style={{paddingLeft:30}}>
+            <CardItem>
+            <CheckBox checked={this.state.sightseeing}
+            onPress={()=> this.setState({
+              sightseeing: !this.state.sightseeing})
+              }
             style={{marginRight:20}}>
             </CheckBox>
             <Text>Sightseeing</Text>
             </CardItem>
             
-            
             <CardItem>
-            <CheckBox checked={false}
-            onPress={()=> this.onePressed()}
+            <CheckBox checked={this.state.typicalFood}
+            onPress={()=> this.setState({
+              typicalFood: !this.state.typicalFood})}
             style={{marginRight:20}}>
             </CheckBox>
             <Text>Typical food</Text>
             </CardItem>
             
             <CardItem>
-            <CheckBox checked={false}
-            onPress={()=> this.onePressed()}
+            <CheckBox checked={this.state.barsandMusic}
+            onPress={()=> this.setState({
+              barsandMusic: !this.state.barsandMusic})}
             style={{marginRight:20}}>
             </CheckBox>
             <Text>Bars and Music</Text>
             </CardItem>
             
             <CardItem>
-            <CheckBox checked={false}
-            onPress={()=> this.onePressed()}
+            <CheckBox checked={this.state.nightlife}
+            onPress={()=> this.setState({
+              nightlife: !this.state.nightlife})}
             style={{marginRight:20}}>
             </CheckBox>
             <Text>Nightlife and Party</Text>
             </CardItem>
+            </View>
+            
             
           </View>
         </ScrollView>
