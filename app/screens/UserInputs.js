@@ -11,7 +11,7 @@ import {
 import {CheckBox, Card, CardItem} from 'native-base'; 
 import DropDownPicker from "react-native-dropdown-picker";
 import DateTimePicker from 'react-native-modal-datetime-picker';
-import moment from 'moment'
+import moment from 'moment';
  
 
 export default class UserInputs extends React.Component {
@@ -38,12 +38,18 @@ export default class UserInputs extends React.Component {
     };
   }
 
-  handlePicker = () => {
-    this.setState({isVisible:false})
+  handlePicker = (datetime) => {
+    this.setState({
+      isVisible:false,
+      chosenDate: moment(datetime).format ('MMMM, Do YYYY HH:mm')})
+
   }
   
   hidePicker = () => {
-    this.setState({isVisible:false})
+    this.setState({
+      isVisible:false,
+      
+    })
   }
 
   showPicker = () => {
@@ -135,16 +141,15 @@ export default class UserInputs extends React.Component {
 
           <View>
             <Text style={styles.bodyText}>Time Slot</Text>
-            <Button title="Show Date Picker" onPress={this.showPicker}  />
+            <Button title="START" onPress={this.showPicker}  />
             <DateTimePicker
                 isVisible={this.state.isVisible} 
                 onConfirm={this.handlePicker}
                 onCancel={this.hidePicker}
                 mode={'datetime'}
                 is24Hour={true} 
-            >
-
-            </DateTimePicker>
+            ></DateTimePicker>
+            <Text>{this.state.chosenDate}</Text>
             
           </View>
           <View>
