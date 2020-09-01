@@ -34,6 +34,8 @@ export default class UserInputs extends React.Component {
       nightlife: false, 
       isVisible: false,
       chosenDate: '',
+      isVisible2: false,
+      chosenDate2: '',
 
     };
   }
@@ -56,6 +58,23 @@ export default class UserInputs extends React.Component {
     this.setState({isVisible:true})
   }
 
+  handlePicker2 = (datetime) => {
+    this.setState({
+      isVisible2:false,
+      chosenDate2: moment(datetime).format ('MMMM, Do YYYY HH:mm')})
+
+  }
+  
+  hidePicker2 = () => {
+    this.setState({
+      isVisible2:false,
+      
+    })
+  }
+
+  showPicker2 = () => {
+    this.setState({isVisible2:true})
+  }
 
   render() {
     return (
@@ -150,7 +169,17 @@ export default class UserInputs extends React.Component {
                 is24Hour={true} 
             ></DateTimePicker>
             <Text>{this.state.chosenDate}</Text>
-            
+
+            <Button title="END" onPress={this.showPicker2}  />
+            <DateTimePicker
+                isVisible={this.state.isVisible2} 
+                onConfirm={this.handlePicker2}
+                onCancel={this.hidePicker2}
+                mode={'datetime'}
+                is24Hour={true} 
+            ></DateTimePicker>
+            <Text>{this.state.chosenDate2}</Text>
+
           </View>
           <View>
             <Text style={styles.bodyText}>Budget</Text>
