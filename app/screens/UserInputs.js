@@ -160,7 +160,8 @@ export default class UserInputs extends React.Component {
 
           <View>
             <Text style={styles.bodyText}>Time Slot</Text>
-            <Button title="START" onPress={this.showPicker}  />
+            <View style={styles.dateTimePickerContainer}>
+            <Button title="START" onPress={this.showPicker}/>
             <DateTimePicker
                 isVisible={this.state.isVisible} 
                 onConfirm={this.handlePicker}
@@ -180,6 +181,8 @@ export default class UserInputs extends React.Component {
             ></DateTimePicker>
             <Text>{this.state.chosenDate2}</Text>
 
+            </View>
+           
           </View>
           <View>
             <Text style={styles.bodyText}>Budget</Text>
@@ -347,5 +350,9 @@ const styles = StyleSheet.create({
   discoverButtonText: {
     color: "#fff",
     fontSize: 24,
+  },
+  dateTimePickerContainer:{
+    paddingLeft: 150,
+    paddingRight:20,
   },
 });
