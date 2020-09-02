@@ -193,6 +193,8 @@ export default class UserInputs extends React.Component {
             maximumValue={300}
             minimumValue={0}
             step={1}
+            minimumTrackTintColor= 'orange'
+            maximumTrackTintColor= 'grey'
             value={this.state.sliderValue}
             onValueChange={(sliderValue)=> this.setState({sliderValue})}
             style={{width:375, height: 50}}
