@@ -26,7 +26,9 @@ export default class Routes extends React.Component {
                         <Text style={styles.activityButtonText}>ACTIVITY 1</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity activeOpacity={0.5}>
+                    <TouchableOpacity activeOpacity={0.5}
+                    onPress={() =>
+                        this.props.navigation.navigate('Transfer')}>
                         <Image
                             source={require('./img/rightArrow.png')}
                             style={styles.ImageIconStyle}
