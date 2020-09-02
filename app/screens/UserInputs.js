@@ -12,6 +12,7 @@ import {CheckBox, Card, CardItem} from 'native-base';
 import DropDownPicker from "react-native-dropdown-picker";
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import moment from 'moment';
+import Slider from '@react-native-community/slider';
  
 
 export default class UserInputs extends React.Component {
@@ -36,6 +37,7 @@ export default class UserInputs extends React.Component {
       chosenDate: '',
       isVisible2: false,
       chosenDate2: '',
+      sliderValue: 15,
 
     };
   }
@@ -186,6 +188,15 @@ export default class UserInputs extends React.Component {
           </View>
           <View>
             <Text style={styles.bodyText}>Budget</Text>
+            <Text style={{paddingLeft: 30}}>Max price: {this.state.sliderValue} €</Text>
+            <Slider
+            maximumValue={300}
+            minimumValue={0}
+            step={1}
+            value={this.state.sliderValue}
+            onValueChange={(sliderValue)=> this.setState({sliderValue})}
+            style={{width:375, height: 50}}
+            ></Slider>
           </View>
  
           <View style={{flexDirection: 'row', paddingBottom:10}}>
