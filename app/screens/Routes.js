@@ -19,13 +19,16 @@ export default class Routes extends React.Component {
                     <Text style={styles.headerText}>Time Schedule</Text>
                 </View>
 
-                <View style={styles.containerButton}>
+                <View>
+
+                    <View style={styles.containerButton}>
                     <TouchableOpacity style={styles.activityButton}
                         onPress={() =>
                             this.props.navigation.navigate('Activity')}>
                         <Text style={styles.activityButtonText}>ACTIVITY 1</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity></View>
 
+                   <View style={styles.arrowRightContainer}>
                     <TouchableOpacity activeOpacity={0.5}
                     onPress={() =>
                         this.props.navigation.navigate('Transfer')}>
@@ -33,11 +36,13 @@ export default class Routes extends React.Component {
                             source={require('./img/rightArrow.png')}
                             style={styles.ImageIconStyle}
                         />
-                    </TouchableOpacity>
-
+                    </TouchableOpacity></View>
+                    
+                    <View style={styles.containerButton}>
                     <TouchableOpacity style={styles.activityButton}>
                         <Text style={styles.activityButtonText}>ACTIVITY 2</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity></View>
+
 
                     <TouchableOpacity activeOpacity={0.5}>
                         <Image
@@ -46,20 +51,23 @@ export default class Routes extends React.Component {
                         />
                     </TouchableOpacity>
 
+                    <View style={styles.containerButton}>
                     <TouchableOpacity style={styles.activityButton}>
                         <Text style={styles.activityButtonText}>ACTIVITY 3</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity></View>
 
+                    <View style={styles.arrowRightContainer}>
                     <TouchableOpacity activeOpacity={0.5}>
                         <Image
                             source={require('./img/rightArrow.png')}
                             style={styles.ImageIconStyle}
                         />
-                    </TouchableOpacity>
+                    </TouchableOpacity></View>
 
+                    <View style={styles.containerButton}>
                     <TouchableOpacity style={styles.activityButton}>
                         <Text style={styles.activityButtonText}>ACTIVITY 4</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity></View>
                 </View>
 
 
@@ -118,10 +126,12 @@ const styles = StyleSheet.create({
         flex: 0,
         justifyContent: 'flex-end',
         marginBottom: 2,
-        backgroundColor: '#79A9E2',
+        backgroundColor: 'white',
         width: 260,
         height: 35,
-        borderRadius: 6,
+        borderWidth: 2.5, 
+        borderRadius: 4,
+        borderColor: 'black',
         alignItems: 'center',
         justifyContent: 'center',
         elevation: 8,
@@ -134,12 +144,21 @@ const styles = StyleSheet.create({
     activityButtonText: {
         color: '#000',
         fontSize: 20,
+        fontWeight: 'bold',
+    },
+    arrowRightContainer: {
+        flex: 0,
+        alignItems: 'flex-end',
+        paddingRight: 10,
+        paddingLeft: 10,
     },
     ImageIconStyle: {
-        margin: 5,
+        margin: 0,
         height: 50,
         width: 50,
         resizeMode: 'stretch',
+
       },
+   
 
 })
