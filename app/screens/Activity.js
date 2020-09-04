@@ -43,7 +43,7 @@ export default class Activity extends React.Component {
 
 
                     <View style={styles.priceContainer}>
-                        <Text style={styles.priceText}>price:</Text>
+                        <Text style={styles.priceText}>price</Text>
                         <View style={styles.pricebuttonContainer}>
                         <TouchableOpacity style={styles.priceButton}>
                             <Text style={styles.priceButtonText}>15 €</Text>
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     header: {
-
+        
     },
     headerText: {
 
@@ -151,10 +151,11 @@ const styles = StyleSheet.create({
         flex: 0,
         alignItems: 'flex-start',
         paddingLeft: 20,
-        flexDirection: 'row',
+        flexDirection: 'column',
     },
     pricebuttonContainer: {
         paddingLeft: 20,
+        paddingTop: 5,
     },
     priceButton: {
         flex: 0,
