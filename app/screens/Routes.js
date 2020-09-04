@@ -71,8 +71,6 @@ export default class Routes extends React.Component {
                 </View>
 
 
-
-
                 <View style={styles.containerButton}>
                     <TouchableOpacity style={styles.discoverButton}
                         onPress={() =>
@@ -99,12 +97,14 @@ const styles = StyleSheet.create({
 
         fontSize: 22,
         padding: 20,
+        paddingBottom: 40,
 
     },
     containerButton: {
-        flex: 0,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+
     },
     discoverButton: {
 
