@@ -7,6 +7,7 @@ import {
     Image,
     ScrollView
 } from 'react-native';
+import MapView, {Marker} from 'react-native-maps';
 
 
 export default class Activity extends React.Component {
@@ -51,8 +52,18 @@ export default class Activity extends React.Component {
                         
                     </View>
 
-                    <View>
+                    <View style={styles.priceContainer}>
                         <Text style={styles.priceText}>location</Text>
+                    </View>
+
+                    <View style={styles.mapContainer}>
+                                <MapView
+                                style={styles.map}
+                                initialRegion={{latitude: 37.78825,
+                                    longitude: -122.4324,
+                                    latitudeDelta: 0.0922,
+                                    longitudeDelta: 0.0421,}}
+                                ></MapView>
                     </View>
 
                 </ScrollView>
@@ -159,5 +170,12 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 15,
         fontWeight: 'bold'
+    },
+    mapContainer: {
+        padding: 20,
+
+    },
+    map: {
+        height: 200,
     },
 })
