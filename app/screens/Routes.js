@@ -7,6 +7,8 @@ import {
     Image
 } from 'react-native';
 
+import LinearGradient from 'react-native-linear-gradient';
+
 
 export default class Routes extends React.Component {
 
@@ -75,7 +77,10 @@ export default class Routes extends React.Component {
                     <TouchableOpacity style={styles.discoverButton}
                         onPress={() =>
                             this.props.navigation.navigate('Routes')}>
-                        <Text style={styles.discoverButtonText}>SAVE THE ROUTE</Text>
+    
+                                <Text style={styles.discoverButtonText}>SAVE THE ROUTE</Text>
+                                
+                        
                     </TouchableOpacity>
                 </View>
 
