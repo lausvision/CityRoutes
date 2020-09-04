@@ -70,6 +70,10 @@ export default class Activity extends React.Component {
                                 </MapView>
                     </View>
 
+                    <View style={styles.priceContainer}>
+                        <Text style={styles.priceText}>reviews</Text>
+                    </View>
+
                 </ScrollView>
 
 
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     mapContainer: {
-        padding: 20,
+        padding: 10,
 
     },
     map: {
