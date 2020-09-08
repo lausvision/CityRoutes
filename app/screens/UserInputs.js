@@ -7,13 +7,13 @@ import {
   ScrollView,
   TouchableOpacity,
   Button,
+  Platform,
 } from "react-native";
-import {CheckBox, Card, CardItem} from 'native-base'; 
+import { CheckBox, Card, CardItem } from "native-base";
 import DropDownPicker from "react-native-dropdown-picker";
-import DateTimePicker from 'react-native-modal-datetime-picker';
-import moment from 'moment';
-import Slider from '@react-native-community/slider';
- 
+import DateTimePicker from "react-native-modal-datetime-picker";
+import moment from "moment";
+import Slider from "@react-native-community/slider";
 
 export default class UserInputs extends React.Component {
   constructor(props) {
@@ -32,56 +32,52 @@ export default class UserInputs extends React.Component {
       sightseeing: false,
       typicalFood: false,
       barsandMusic: false,
-      nightlife: false, 
+      nightlife: false,
       isVisible: false,
-      chosenDate: '',
+      chosenDate: "",
       isVisible2: false,
-      chosenDate2: '',
+      chosenDate2: "",
       sliderValue: 15,
-
     };
   }
 
   handlePicker = (datetime) => {
     this.setState({
-      isVisible:false,
-      chosenDate: moment(datetime).format ('MMMM, Do YYYY HH:mm')})
+      isVisible: false,
+      chosenDate: moment(datetime).format("MMMM, Do YYYY HH:mm"),
+    });
+  };
 
-  }
-  
   hidePicker = () => {
     this.setState({
-      isVisible:false,
-      
-    })
-  }
+      isVisible: false,
+    });
+  };
 
   showPicker = () => {
-    this.setState({isVisible:true})
-  }
+    this.setState({ isVisible: true });
+  };
 
   handlePicker2 = (datetime) => {
     this.setState({
-      isVisible2:false,
-      chosenDate2: moment(datetime).format ('MMMM, Do YYYY HH:mm')})
+      isVisible2: false,
+      chosenDate2: moment(datetime).format("MMMM, Do YYYY HH:mm"),
+    });
+  };
 
-  }
-  
   hidePicker2 = () => {
     this.setState({
-      isVisible2:false,
-      
-    })
-  }
+      isVisible2: false,
+    });
+  };
 
   showPicker2 = () => {
-    this.setState({isVisible2:true})
-  }
+    this.setState({ isVisible2: true });
+  };
 
   render() {
     return (
       <View style={styles.container}>
-
         <ScrollView style={styles.scrollConatainer}>
           <View style={styles.inputContainer}>
             <Text style={styles.bodyText}>Country</Text>
@@ -112,8 +108,8 @@ export default class UserInputs extends React.Component {
               // Searchbar inside the dropdown
               searchable={true}
               searchablePlaceholder="Search..."
-              earchablePlaceholderTextColor="gray"
-              seachableStyle={{}}
+              searchablePlaceholderTextColor="gray"
+              searchableStyle={{}}
               searchableError={() => <Text>Not Found</Text>}
             />
           </View>
@@ -154,145 +150,179 @@ export default class UserInputs extends React.Component {
               // Searchbar inside the dropdown
               searchable={true}
               searchablePlaceholder="Search..."
-              earchablePlaceholderTextColor="gray"
-              seachableStyle={{}}
+              searchablePlaceholderTextColor="gray"
+              searchableStyle={{}}
               searchableError={() => <Text>Not Found</Text>}
             />
           </View>
-
+          <View>
+            <Text style={styles.bodyText}>Location</Text>
+            <View style={styles.dateTimePickerContainer}>
+              <Button
+                title="PICK START POINT"
+                onPress={() => this.props.navigation.navigate("Location")}
+              />
+            </View>
+          </View>
           <View>
             <Text style={styles.bodyText}>Time Slot</Text>
             <View style={styles.dateTimePickerContainer}>
-            <Button title="START" onPress={this.showPicker}/>
-            <DateTimePicker
-                isVisible={this.state.isVisible} 
+              <Button title="START" onPress={this.showPicker} />
+              <DateTimePicker
+                isVisible={this.state.isVisible}
                 onConfirm={this.handlePicker}
                 onCancel={this.hidePicker}
-                mode={'datetime'}
-                is24Hour={true} 
-            ></DateTimePicker>
-            <Text>{this.state.chosenDate}</Text>
+                mode={"datetime"}
+                is24Hour={true}
+              ></DateTimePicker>
+              <Text>{this.state.chosenDate}</Text>
 
-            <Button title="END" onPress={this.showPicker2}  />
-            <DateTimePicker
-                isVisible={this.state.isVisible2} 
+              <Button title="END" onPress={this.showPicker2} />
+              <DateTimePicker
+                isVisible={this.state.isVisible2}
                 onConfirm={this.handlePicker2}
                 onCancel={this.hidePicker2}
-                mode={'datetime'}
-                is24Hour={true} 
-            ></DateTimePicker>
-            <Text>{this.state.chosenDate2}</Text>
-
+                mode={"datetime"}
+                is24Hour={true}
+              ></DateTimePicker>
+              <Text>{this.state.chosenDate2}</Text>
             </View>
-           
           </View>
           <View>
             <Text style={styles.bodyText}>Budget</Text>
-            <Text style={{paddingLeft: 30}}>Max price: {this.state.sliderValue} €</Text>
+            <Text style={{ paddingLeft: 30 }}>
+              Max price: {this.state.sliderValue} €
+            </Text>
             <Slider
-            maximumValue={300}
-            minimumValue={0}
-            step={1}
-            minimumTrackTintColor= 'orange'
-            maximumTrackTintColor= 'grey'
-            value={this.state.sliderValue}
-            onValueChange={(sliderValue)=> this.setState({sliderValue})}
-            style={{width:375, height: 50}}
+              maximumValue={300}
+              minimumValue={0}
+              step={1}
+              minimumTrackTintColor="orange"
+              maximumTrackTintColor="grey"
+              value={this.state.sliderValue}
+              onValueChange={(sliderValue) => this.setState({ sliderValue })}
+              style={{ width: 375, height: 50 }}
             ></Slider>
           </View>
- 
-          <View style={{flexDirection: 'row', paddingBottom:10}}>
+
+          <View style={{ flexDirection: "row", paddingBottom: 10 }}>
             <View>
-            <Text style={styles.bodyText}>Mobility</Text>
+              <Text style={styles.bodyText}>Mobility</Text>
             </View>
-            
-            <View style={{paddingLeft:30}}>
-            <CardItem>
-            <CheckBox checked={this.state.taxi}
-            onPress={()=> this.setState({
-              taxi: !this.state.taxi})
-              }
-            style={{marginRight:20}}>
-            </CheckBox>
-            <Text>Taxi</Text>
-            </CardItem>
-            
-            <CardItem>
-            <CheckBox checked={this.state.bike}
-            onPress={()=> this.setState({
-              bike: !this.state.bike})}
-            style={{marginRight:20}}>
-            </CheckBox>
-            <Text>Bike</Text>
-            </CardItem>
-            
-            <CardItem>
-            <CheckBox checked={this.state.publicTransport}
-            onPress={()=> this.setState({
-              publicTransport: !this.state.publicTransport})}
-            style={{marginRight:20}}>
-            </CheckBox>
-            <Text>Public Transport</Text>
-            </CardItem>
-            
-            <CardItem>
-            <CheckBox checked={this.state.privateTransport}
-            onPress={()=> this.setState({
-              privateTransport: !this.state.privateTransport})}
-            style={{marginRight:20}}>
-            </CheckBox>
-            <Text>Private trasnport</Text>
-            </CardItem>
+
+            <View style={{ paddingLeft: 30 }}>
+              <CardItem>
+                <CheckBox
+                  checked={this.state.taxi}
+                  onPress={() =>
+                    this.setState({
+                      taxi: !this.state.taxi,
+                    })
+                  }
+                  style={{ marginRight: 20 }}
+                ></CheckBox>
+                <Text>Taxi</Text>
+              </CardItem>
+
+              <CardItem>
+                <CheckBox
+                  checked={this.state.bike}
+                  onPress={() =>
+                    this.setState({
+                      bike: !this.state.bike,
+                    })
+                  }
+                  style={{ marginRight: 20 }}
+                ></CheckBox>
+                <Text>Bike</Text>
+              </CardItem>
+
+              <CardItem>
+                <CheckBox
+                  checked={this.state.publicTransport}
+                  onPress={() =>
+                    this.setState({
+                      publicTransport: !this.state.publicTransport,
+                    })
+                  }
+                  style={{ marginRight: 20 }}
+                ></CheckBox>
+                <Text>Public Transport</Text>
+              </CardItem>
+
+              <CardItem>
+                <CheckBox
+                  checked={this.state.privateTransport}
+                  onPress={() =>
+                    this.setState({
+                      privateTransport: !this.state.privateTransport,
+                    })
+                  }
+                  style={{ marginRight: 20 }}
+                ></CheckBox>
+                <Text>Private trasnport</Text>
+              </CardItem>
             </View>
-            
-            
           </View>
 
-          <View style={{flexDirection: 'row'}}>
+          <View style={{ flexDirection: "row" }}>
             <View>
-            <Text style={styles.bodyText}>Interest</Text>
+              <Text style={styles.bodyText}>Interest</Text>
             </View>
-            
-            <View style={{paddingLeft:30}}>
-            <CardItem>
-            <CheckBox checked={this.state.sightseeing}
-            onPress={()=> this.setState({
-              sightseeing: !this.state.sightseeing})
-              }
-            style={{marginRight:20}}>
-            </CheckBox>
-            <Text>Sightseeing</Text>
-            </CardItem>
-            
-            <CardItem>
-            <CheckBox checked={this.state.typicalFood}
-            onPress={()=> this.setState({
-              typicalFood: !this.state.typicalFood})}
-            style={{marginRight:20}}>
-            </CheckBox>
-            <Text>Typical food</Text>
-            </CardItem>
-            
-            <CardItem>
-            <CheckBox checked={this.state.barsandMusic}
-            onPress={()=> this.setState({
-              barsandMusic: !this.state.barsandMusic})}
-            style={{marginRight:20}}>
-            </CheckBox>
-            <Text>Bars and Music</Text>
-            </CardItem>
-            
-            <CardItem>
-            <CheckBox checked={this.state.nightlife}
-            onPress={()=> this.setState({
-              nightlife: !this.state.nightlife})}
-            style={{marginRight:20}}>
-            </CheckBox>
-            <Text>Nightlife and Party</Text>
-            </CardItem>
+
+            <View style={{ paddingLeft: 30 }}>
+              <CardItem>
+                <CheckBox
+                  checked={this.state.sightseeing}
+                  onPress={() =>
+                    this.setState({
+                      sightseeing: !this.state.sightseeing,
+                    })
+                  }
+                  style={{ marginRight: 20 }}
+                ></CheckBox>
+                <Text>Sightseeing</Text>
+              </CardItem>
+
+              <CardItem>
+                <CheckBox
+                  checked={this.state.typicalFood}
+                  onPress={() =>
+                    this.setState({
+                      typicalFood: !this.state.typicalFood,
+                    })
+                  }
+                  style={{ marginRight: 20 }}
+                ></CheckBox>
+                <Text>Typical food</Text>
+              </CardItem>
+
+              <CardItem>
+                <CheckBox
+                  checked={this.state.barsandMusic}
+                  onPress={() =>
+                    this.setState({
+                      barsandMusic: !this.state.barsandMusic,
+                    })
+                  }
+                  style={{ marginRight: 20 }}
+                ></CheckBox>
+                <Text>Bars and Music</Text>
+              </CardItem>
+
+              <CardItem>
+                <CheckBox
+                  checked={this.state.nightlife}
+                  onPress={() =>
+                    this.setState({
+                      nightlife: !this.state.nightlife,
+                    })
+                  }
+                  style={{ marginRight: 20 }}
+                ></CheckBox>
+                <Text>Nightlife and Party</Text>
+              </CardItem>
             </View>
-            
-            
           </View>
         </ScrollView>
 
@@ -325,6 +355,7 @@ const styles = StyleSheet.create({
     backgroundColor: "powderblue",
   },
   dropDownItem: {
+    zIndex: 99,
     paddingLeft: 30,
     paddingBottom: 5,
     paddingTop: 10,
@@ -364,8 +395,8 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 24,
   },
-  dateTimePickerContainer:{
+  dateTimePickerContainer: {
     paddingLeft: 150,
-    paddingRight:20,
+    paddingRight: 20,
   },
 });
