@@ -329,7 +329,7 @@ export default class UserInputs extends React.Component {
         <View style={styles.containerButton}>
           <TouchableOpacity
             style={styles.discoverButton}
-            onPress={() => this.props.navigation.navigate("Routes")}
+            onPress={() => this.props.navigation.navigate("Selection")}
           >
             <Text style={styles.discoverButtonText}>DISCOVER</Text>
           </TouchableOpacity>

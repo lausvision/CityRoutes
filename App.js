@@ -9,6 +9,7 @@ import Activity from './app/screens/Activity';
 import Transfer from './app/screens/Transfer';
 import Home from './app/screens/Home';
 import Location from './app/screens/Location';
+import Selection from './app/screens/Selection';
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ function AppNavigator(){
       <Stack.Screen name="Activity" component={Activity} />
       <Stack.Screen name="Transfer" component={Transfer} />
       <Stack.Screen name="Location" component={Location} />
+      <Stack.Screen name="Selection" component={Selection} />
     </Stack.Navigator>
   )
 }
