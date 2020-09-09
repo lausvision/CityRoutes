@@ -70,6 +70,19 @@ export default class Routes extends React.Component {
                     <TouchableOpacity style={styles.activityButton}>
                         <Text style={styles.activityButtonText}>ACTIVITY 4</Text>
                     </TouchableOpacity></View>
+
+                    
+                </View>
+
+                <View style={styles.containerButton}>
+                    <TouchableOpacity style={styles.redoButton}
+                        onPress={() =>
+                            this.props.navigation.navigate('Routes')}>
+    
+                                <Text style={styles.redoButtonText}>REDO ROUTE</Text>
+                                
+                        
+                    </TouchableOpacity>
                 </View>
 
 
@@ -163,6 +176,24 @@ const styles = StyleSheet.create({
         width: 50,
         resizeMode: 'stretch',
 
+      },
+      redoButton: {
+        flex: 0,
+        justifyContent: 'center',
+        marginBottom: 1,
+        backgroundColor: 'black',
+        width: 200,
+        height: 30,
+        borderWidth: 2.5,
+        borderRadius: 13,
+        borderColor: 'black',
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 8,
+      },
+      redoButtonText: {
+        color: 'white',
+        fontSize: 20,
       },
    
 
