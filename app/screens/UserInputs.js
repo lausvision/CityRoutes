@@ -174,6 +174,7 @@ export default class UserInputs extends React.Component {
                 onCancel={this.hidePicker}
                 mode={"datetime"}
                 is24Hour={true}
+                minimumDate={new Date().getDate}
               ></DateTimePicker>
               <Text>{this.state.chosenDate}</Text>
 
@@ -182,7 +183,7 @@ export default class UserInputs extends React.Component {
                 isVisible={this.state.isVisible2}
                 onConfirm={this.handlePicker2}
                 onCancel={this.hidePicker2}
-                mode={"datetime"}
+                mode={"time"}
                 is24Hour={true}
               ></DateTimePicker>
               <Text>{this.state.chosenDate2}</Text>
