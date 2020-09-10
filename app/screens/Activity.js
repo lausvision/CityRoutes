@@ -7,8 +7,8 @@ import {
     Image,
     ScrollView
 } from 'react-native';
-import MapView, {Marker} from 'react-native-maps';
-
+import MapView, { Marker } from 'react-native-maps';
+import Stars from 'react-native-stars';
 
 export default class Activity extends React.Component {
 
@@ -45,11 +45,11 @@ export default class Activity extends React.Component {
                     <View style={styles.priceContainer}>
                         <Text style={styles.priceText}>price</Text>
                         <View style={styles.pricebuttonContainer}>
-                        <TouchableOpacity style={styles.priceButton}>
-                            <Text style={styles.priceButtonText}>15 €</Text>
-                        </TouchableOpacity>
+                            <TouchableOpacity style={styles.priceButton}>
+                                <Text style={styles.priceButtonText}>15 €</Text>
+                            </TouchableOpacity>
                         </View>
-                        
+
                     </View>
 
                     <View style={styles.priceContainer}>
@@ -57,21 +57,34 @@ export default class Activity extends React.Component {
                     </View>
 
                     <View style={styles.mapContainer}>
-                                <MapView
-                                style={styles.map}
-                                initialRegion={{latitude: 37.78825,
-                                    longitude: -122.4324,
-                                    latitudeDelta: 0.0922,
-                                    longitudeDelta: 0.0421,}}
-                                >
-                                    <Marker coordinate={{latitude: 37.78825,
-                                    longitude: -122.4324,}} title='Marker'/>
+                        <MapView
+                            style={styles.map}
+                            initialRegion={{
+                                latitude: 37.78825,
+                                longitude: -122.4324,
+                                latitudeDelta: 0.0922,
+                                longitudeDelta: 0.0421,
+                            }}
+                        >
+                            <Marker coordinate={{
+                                latitude: 37.78825,
+                                longitude: -122.4324,
+                            }} title='Marker' />
 
-                                </MapView>
+                        </MapView>
                     </View>
 
                     <View style={styles.priceContainer}>
                         <Text style={styles.priceText}>reviews</Text>
+                    </View>
+
+                    <View style={{ alignItems: 'center' }}>
+                        <Stars
+                            display={3.67}
+                            spacing={8}
+                            count={5}
+                            starSize={40}
+                             />
                     </View>
 
                 </ScrollView>
@@ -90,7 +103,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     header: {
-        
+
     },
     headerText: {
 
@@ -122,7 +135,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         width: 95,
         height: 30,
-        borderWidth: 2.5, 
+        borderWidth: 2.5,
         borderRadius: 4,
         borderColor: 'black',
         alignItems: 'center',
@@ -168,7 +181,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
         width: 95,
         height: 30,
-        borderWidth: 2.5, 
+        borderWidth: 2.5,
         borderRadius: 13,
         borderColor: 'black',
         alignItems: 'center',
