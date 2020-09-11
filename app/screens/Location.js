@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import GradientButton from 'react-native-gradient-buttons';
 
 export default class Activity extends React.Component {
   constructor(props) {
@@ -48,14 +49,26 @@ export default class Activity extends React.Component {
             </MapView>
           </View>
           <View>
-            <View style={styles.dateTimePickerContainer}>
-              <Button
-                title="ACCEPT"
-                onPress={() => {
-                  this.props.navigation.navigate("UserInputs");
-                  console.log(this.state.x);
-                }}
-              />
+            <View style={styles.containerButton}>
+
+            <GradientButton
+            style={{ marginVertical: 8 }}
+            text="LOCATE"
+            textStyle={{ fontSize: 20 }}
+            gradientBegin="#00008b"
+            gradientEnd="#f5ba57"
+            gradientDirection="diagonal"
+            height={60}
+            width={300}
+            radius={15}
+            impact
+            impactStyle='Light'
+            onPressAction={() => {
+              this.props.navigation.navigate("UserInputs");
+              console.log(this.state.x);
+            }}
+          />
+              
             </View>
           </View>
         </ScrollView>
@@ -83,9 +96,8 @@ const styles = StyleSheet.create({
   },
   containerButton: {
     flex: 0,
-    alignItems: "flex-end",
+    alignItems: "center",
     justifyContent: "center",
-    paddingRight: 35,
   },
   moreinfoButton: {
     flex: 0,
@@ -113,6 +125,6 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   map: {
-    height: 500,
+    height: 340,
   },
 });
