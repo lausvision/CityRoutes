@@ -7,7 +7,7 @@ import {
     Image
 } from 'react-native';
 
-import LinearGradient from 'react-native-linear-gradient';
+import GradientButton from 'react-native-gradient-buttons';
 
 
 export default class Routes extends React.Component {
@@ -24,26 +24,26 @@ export default class Routes extends React.Component {
                 <View>
 
                     <View style={styles.containerButton}>
-                    <TouchableOpacity style={styles.activityButton}
-                        onPress={() =>
-                            this.props.navigation.navigate('Activity')}>
-                        <Text style={styles.activityButtonText}>ACTIVITY 1</Text>
-                    </TouchableOpacity></View>
+                        <TouchableOpacity style={styles.activityButton}
+                            onPress={() =>
+                                this.props.navigation.navigate('Activity')}>
+                            <Text style={styles.activityButtonText}>ACTIVITY 1</Text>
+                        </TouchableOpacity></View>
 
-                   <View style={styles.arrowRightContainer}>
-                    <TouchableOpacity activeOpacity={0.5}
-                    onPress={() =>
-                        this.props.navigation.navigate('Transfer')}>
-                        <Image
-                            source={require('./img/rightArrow.png')}
-                            style={styles.ImageIconStyle}
-                        />
-                    </TouchableOpacity></View>
-                    
+                    <View style={styles.arrowRightContainer}>
+                        <TouchableOpacity activeOpacity={0.5}
+                            onPress={() =>
+                                this.props.navigation.navigate('Transfer')}>
+                            <Image
+                                source={require('./img/rightArrow.png')}
+                                style={styles.ImageIconStyle}
+                            />
+                        </TouchableOpacity></View>
+
                     <View style={styles.containerButton}>
-                    <TouchableOpacity style={styles.activityButton}>
-                        <Text style={styles.activityButtonText}>ACTIVITY 2</Text>
-                    </TouchableOpacity></View>
+                        <TouchableOpacity style={styles.activityButton}>
+                            <Text style={styles.activityButtonText}>ACTIVITY 2</Text>
+                        </TouchableOpacity></View>
 
 
                     <TouchableOpacity activeOpacity={0.5}>
@@ -54,47 +54,55 @@ export default class Routes extends React.Component {
                     </TouchableOpacity>
 
                     <View style={styles.containerButton}>
-                    <TouchableOpacity style={styles.activityButton}>
-                        <Text style={styles.activityButtonText}>ACTIVITY 3</Text>
-                    </TouchableOpacity></View>
+                        <TouchableOpacity style={styles.activityButton}>
+                            <Text style={styles.activityButtonText}>ACTIVITY 3</Text>
+                        </TouchableOpacity></View>
 
                     <View style={styles.arrowRightContainer}>
-                    <TouchableOpacity activeOpacity={0.5}>
-                        <Image
-                            source={require('./img/rightArrow.png')}
-                            style={styles.ImageIconStyle}
-                        />
-                    </TouchableOpacity></View>
+                        <TouchableOpacity activeOpacity={0.5}>
+                            <Image
+                                source={require('./img/rightArrow.png')}
+                                style={styles.ImageIconStyle}
+                            />
+                        </TouchableOpacity></View>
 
                     <View style={styles.containerButton}>
-                    <TouchableOpacity style={styles.activityButton}>
-                        <Text style={styles.activityButtonText}>ACTIVITY 4</Text>
-                    </TouchableOpacity></View>
+                        <TouchableOpacity style={styles.activityButton}>
+                            <Text style={styles.activityButtonText}>ACTIVITY 4</Text>
+                        </TouchableOpacity></View>
 
-                    
+
                 </View>
+
 
                 <View style={styles.containerButton}>
                     <TouchableOpacity style={styles.redoButton}
                         onPress={() =>
                             this.props.navigation.navigate('Routes')}>
-    
-                                <Text style={styles.redoButtonText}>REDO ROUTE</Text>
-                                
-                        
+
+                        <Text style={styles.redoButtonText}>REDO ROUTE</Text>
+
+
                     </TouchableOpacity>
                 </View>
 
 
                 <View style={styles.containerButton}>
-                    <TouchableOpacity style={styles.discoverButton}
-                        onPress={() =>
-                            this.props.navigation.navigate('Routes')}>
-    
-                                <Text style={styles.discoverButtonText}>SAVE THE ROUTE</Text>
-                                
-                        
-                    </TouchableOpacity>
+                    <GradientButton
+                        style={{ marginVertical: 8 }}
+                        text="SAVE THE ROUTE"
+                        textStyle={{ fontSize: 20 }}
+                        gradientBegin="#00008b"
+                        gradientEnd="#f5ba57"
+                        gradientDirection="diagonal"
+                        height={60}
+                        width={300}
+                        radius={15}
+                        impact
+                        impactStyle='Light'
+                        onPressAction={() => this.props.navigation.navigate("Routes")}
+                    />
+
                 </View>
 
             </View>
@@ -147,7 +155,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         width: 260,
         height: 35,
-        borderWidth: 2.5, 
+        borderWidth: 2.5,
         borderRadius: 4,
         borderColor: 'black',
         alignItems: 'center',
@@ -176,8 +184,8 @@ const styles = StyleSheet.create({
         width: 50,
         resizeMode: 'stretch',
 
-      },
-      redoButton: {
+    },
+    redoButton: {
         flex: 0,
         justifyContent: 'center',
         marginBottom: 1,
@@ -190,11 +198,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         elevation: 8,
-      },
-      redoButtonText: {
+    },
+    redoButtonText: {
         color: 'white',
         fontSize: 20,
-      },
-   
+    },
+
 
 })
