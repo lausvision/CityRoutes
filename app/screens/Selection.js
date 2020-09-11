@@ -9,7 +9,7 @@ import {
   Alert,
 } from "react-native";
 
-import LinearGradient from "react-native-linear-gradient";
+import GradientButton from 'react-native-gradient-buttons';
 
 export default class Routes extends React.Component {
   render() {
@@ -59,13 +59,24 @@ export default class Routes extends React.Component {
         </View>
 
         <View style={styles.containerButton}>
-          <TouchableOpacity
-            style={styles.discoverButton}
-            onPress={() => this.props.navigation.navigate("Routes")}
-          >
-            <Text style={styles.discoverButtonText}>GENERATE ROUTE</Text>
-          </TouchableOpacity>
+          
+        <GradientButton
+                        style={{ marginVertical: 8 }}
+                        text="GENERATE ROUTE"
+                        textStyle={{ fontSize: 20 }}
+                        gradientBegin="#00008b"
+                        gradientEnd="#f5ba57"
+                        gradientDirection="diagonal"
+                        height={60}
+                        width={300}
+                        radius={15}
+                        impact
+                        impactStyle='Light'
+                        onPressAction={() => this.props.navigation.navigate("Routes")}
+                    />
+
         </View>
+
       </View>
     );
   }
