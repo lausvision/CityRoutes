@@ -157,27 +157,64 @@ export default class UserInputs extends React.Component {
           <View>
             <Text style={styles.bodyText}>Location</Text>
             <View style={styles.dateTimePickerContainer}>
-              <Button
-                title="PICK START POINT"
-                onPress={() => this.props.navigation.navigate("Location")}
+
+              <GradientButton
+                style={{ marginVertical: 8 }}
+                text="PICK START POINT"
+                textStyle={{ fontSize: 10 }}
+                gradientBegin="black"
+                gradientEnd="black"
+                gradientDirection="diagonal"
+                height={32}
+                width={175}
+                radius={4}
+                impact
+                impactStyle='Light'
+                onPressAction={() => this.props.navigation.navigate("Location")}
               />
+
             </View>
           </View>
           <View>
             <Text style={styles.bodyText}>Time Slot</Text>
             <View style={styles.dateTimePickerContainer}>
-              <Button title="START" onPress={this.showPicker} />
+              <GradientButton
+                style={{ marginVertical: 8 }}
+                text="START"
+                textStyle={{ fontSize: 15 }}
+                gradientBegin="green"
+                gradientEnd="#7cfc00"
+                gradientDirection="diagonal"
+                height={35}
+                width={175}
+                radius={4}
+                impact
+                impactStyle='Light'
+                onPressAction={this.showPicker}
+              />
               <DateTimePicker
                 isVisible={this.state.isVisible}
                 onConfirm={this.handlePicker}
                 onCancel={this.hidePicker}
                 mode={"datetime"}
                 is24Hour={true}
-
               ></DateTimePicker>
               <Text>{this.state.chosenDate}</Text>
 
-              <Button title="END" onPress={this.showPicker2} />
+              <GradientButton
+                style={{ marginVertical: 8 }}
+                text="END"
+                textStyle={{ fontSize: 15 }}
+                gradientBegin="red"
+                gradientEnd="#800000"
+                gradientDirection="diagonal"
+                height={35}
+                width={175}
+                radius={4}
+                impact
+                impactStyle='Light'
+                onPressAction={this.showPicker2}
+              />
               <DateTimePicker
                 isVisible={this.state.isVisible2}
                 onConfirm={this.handlePicker2}
@@ -199,6 +236,7 @@ export default class UserInputs extends React.Component {
               step={1}
               minimumTrackTintColor="orange"
               maximumTrackTintColor="grey"
+              thumbTintColor='#00008b'
               value={this.state.sliderValue}
               onValueChange={(sliderValue) => this.setState({ sliderValue })}
               style={{ width: 375, height: 50 }}
@@ -260,7 +298,7 @@ export default class UserInputs extends React.Component {
                   }
                   style={{ marginRight: 20 }}
                 ></CheckBox>
-                <Text>Private trasnport</Text>
+                <Text>Private transport</Text>
               </CardItem>
             </View>
           </View>
