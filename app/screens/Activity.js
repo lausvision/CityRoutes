@@ -74,17 +74,26 @@ export default class Activity extends React.Component {
                         </MapView>
                     </View>
 
-                    <View style={styles.priceContainer}>
-                        <Text style={styles.priceText}>reviews</Text>
-                    </View>
+                    <View
+                            style={{
+                                borderBottomColor: "black",
+                                borderBottomWidth: 1,
+                                margin: 10,
+                            }}
+                        />
 
                     <View style={{ alignItems: 'center' }}>
+                        
+                        <Text style={{ paddingBottom: 10, fontWeight: 'bold', color: 'orange' }}>45 reviews</Text>
                         <Stars
                             display={3.67}
                             spacing={8}
                             count={5}
                             starSize={40}
-                             />
+                            style={{ paddingBottom: 10 }}
+                        />
+                        <Text style={{ paddingTop: 10, fontWeight: 'bold', fontSize: 25 }}>3.67/5</Text>
+                        
                     </View>
 
                 </ScrollView>
