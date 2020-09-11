@@ -3,17 +3,16 @@ import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   ScrollView,
   TouchableOpacity,
   Button,
-  Platform,
 } from "react-native";
 import { CheckBox, Card, CardItem } from "native-base";
 import DropDownPicker from "react-native-dropdown-picker";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import moment from "moment";
 import Slider from "@react-native-community/slider";
+import GradientButton from 'react-native-gradient-buttons';
 
 export default class UserInputs extends React.Component {
   constructor(props) {
@@ -174,7 +173,7 @@ export default class UserInputs extends React.Component {
                 onCancel={this.hidePicker}
                 mode={"datetime"}
                 is24Hour={true}
-                minimumDate={new Date().getDate}
+
               ></DateTimePicker>
               <Text>{this.state.chosenDate}</Text>
 
@@ -328,12 +327,22 @@ export default class UserInputs extends React.Component {
         </ScrollView>
 
         <View style={styles.containerButton}>
-          <TouchableOpacity
-            style={styles.discoverButton}
-            onPress={() => this.props.navigation.navigate("Selection")}
-          >
-            <Text style={styles.discoverButtonText}>DISCOVER</Text>
-          </TouchableOpacity>
+
+          <GradientButton
+            style={{ marginVertical: 8 }}
+            text="GENERATE ROUTE"
+            textStyle={{ fontSize: 20 }}
+            gradientBegin="#00008b"
+            gradientEnd="#f5ba57"
+            gradientDirection="diagonal"
+            height={60}
+            width={300}
+            radius={15}
+            impact
+            impactStyle='Light'
+            onPressAction={() => this.props.navigation.navigate("Selection")}
+          />
+
         </View>
       </View>
     );
