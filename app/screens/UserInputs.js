@@ -161,9 +161,9 @@ export default class UserInputs extends React.Component {
               <GradientButton
                 style={{ marginVertical: 8 }}
                 text="PICK START POINT"
-                textStyle={{ fontSize: 10 }}
-                gradientBegin="black"
-                gradientEnd="black"
+                textStyle={{ fontSize: 13 }}
+                gradientBegin="#00008b"
+                gradientEnd="#00008b"
                 gradientDirection="diagonal"
                 height={32}
                 width={175}
