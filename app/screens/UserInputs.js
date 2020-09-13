@@ -249,7 +249,8 @@ export default class UserInputs extends React.Component {
             </View>
 
             <View style={{ paddingLeft: 30 }}>
-              <CardItem>
+              
+            <View style={{ flexDirection: "row", paddingBottom: 10 , paddingTop: 18}}>    
                 <CheckBox
                   checked={this.state.taxi}
                   onPress={() =>
@@ -258,11 +259,14 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
+                  checkedIcon='dot-circle-o'
+                  uncheckedIcon='circle-o'
+                  checkedColor='red'
                 ></CheckBox>
                 <Text>Taxi</Text>
-              </CardItem>
+                </View>
 
-              <CardItem>
+                <View style={{ flexDirection: "row", paddingBottom: 10 }}>    
                 <CheckBox
                   checked={this.state.bike}
                   onPress={() =>
@@ -273,9 +277,9 @@ export default class UserInputs extends React.Component {
                   style={{ marginRight: 20 }}
                 ></CheckBox>
                 <Text>Bike</Text>
-              </CardItem>
+              </View>
 
-              <CardItem>
+              <View style={{ flexDirection: "row", paddingBottom: 10 }}>    
                 <CheckBox
                   checked={this.state.publicTransport}
                   onPress={() =>
@@ -286,9 +290,9 @@ export default class UserInputs extends React.Component {
                   style={{ marginRight: 20 }}
                 ></CheckBox>
                 <Text>Public Transport</Text>
-              </CardItem>
+              </View>
 
-              <CardItem>
+              <View style={{ flexDirection: "row", paddingBottom: 10 }}>    
                 <CheckBox
                   checked={this.state.privateTransport}
                   onPress={() =>
@@ -299,7 +303,7 @@ export default class UserInputs extends React.Component {
                   style={{ marginRight: 20 }}
                 ></CheckBox>
                 <Text>Private transport</Text>
-              </CardItem>
+              </View>
             </View>
           </View>
 
@@ -309,7 +313,7 @@ export default class UserInputs extends React.Component {
             </View>
 
             <View style={{ paddingLeft: 30 }}>
-              <CardItem>
+            <View style={{ flexDirection: "row", paddingBottom: 10 ,paddingTop: 18}}>    
                 <CheckBox
                   checked={this.state.sightseeing}
                   onPress={() =>
@@ -320,9 +324,9 @@ export default class UserInputs extends React.Component {
                   style={{ marginRight: 20 }}
                 ></CheckBox>
                 <Text>Sightseeing</Text>
-              </CardItem>
+              </View>
 
-              <CardItem>
+              <View style={{ flexDirection: "row", paddingBottom: 10 }}>    
                 <CheckBox
                   checked={this.state.typicalFood}
                   onPress={() =>
@@ -333,9 +337,9 @@ export default class UserInputs extends React.Component {
                   style={{ marginRight: 20 }}
                 ></CheckBox>
                 <Text>Typical food</Text>
-              </CardItem>
+              </View>
 
-              <CardItem>
+              <View style={{ flexDirection: "row", paddingBottom: 10 }}>    
                 <CheckBox
                   checked={this.state.barsandMusic}
                   onPress={() =>
@@ -346,9 +350,9 @@ export default class UserInputs extends React.Component {
                   style={{ marginRight: 20 }}
                 ></CheckBox>
                 <Text>Bars and Music</Text>
-              </CardItem>
+              </View>
 
-              <CardItem>
+              <View style={{ flexDirection: "row", paddingBottom: 10 }}>    
                 <CheckBox
                   checked={this.state.nightlife}
                   onPress={() =>
@@ -359,7 +363,7 @@ export default class UserInputs extends React.Component {
                   style={{ marginRight: 20 }}
                 ></CheckBox>
                 <Text>Nightlife and Party</Text>
-              </CardItem>
+              </View>
             </View>
           </View>
         </ScrollView>
