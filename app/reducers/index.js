@@ -26,7 +26,7 @@ const SelectionReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        todos: action.payload,
+        selectedActivities: action.payload,
       };
     }
   }
