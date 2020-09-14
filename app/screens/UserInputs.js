@@ -377,7 +377,7 @@ export default class UserInputs extends React.Component {
 
           <GradientButton
             style={{ marginVertical: 8 }}
-            text="GENERATE ROUTE"
+            text="DISCOVER"
             textStyle={{ fontSize: 20 }}
             gradientBegin="#00008b"
             gradientEnd="#f5ba57"
