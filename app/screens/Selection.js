@@ -7,6 +7,7 @@ import {
   Image,
   Button,
   Alert,
+  ScrollView
 } from "react-native";
 
 import GradientButton from 'react-native-gradient-buttons';
@@ -18,64 +19,80 @@ export default class Routes extends React.Component {
         <View style={styles.header}>
           <Text style={styles.headerText}>Activity selection</Text>
         </View>
-        <View style={styles.containerButton}>
-          <Button
-            title="Info"
-            onPress={() =>
-              Alert.alert(
-                "If NO interesting slide the activity to the left. If YES press Generate Route."
-              )
-            }
-          />
-        </View>
 
-        <View style={styles.containerButton}>
+        <ScrollView style={styles.scrollConatainer}>
           <View style={styles.containerButton}>
-            <TouchableOpacity
-              style={styles.activityButton}
-              onPress={() => this.props.navigation.navigate("Activity")}
-            >
-              <Text style={styles.activityButtonText}>ACTIVITY 1</Text>
-            </TouchableOpacity>
+            <View style={styles.containerButton}>
+              <TouchableOpacity
+                style={styles.activityButton}
+                onPress={() => this.props.navigation.navigate("Activity")}
+              >
+                <Text style={styles.activityButtonText}>ACTIVITY 1</Text>
+                <Text style={styles.timeScheduleText}>from 10:00 h</Text>
+                <Text style={styles.timeScheduleText}>to 12:00 h</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View>
+              <TouchableOpacity activeOpacity={0.5}
+                 onPress={() =>
+                  Alert.alert(
+                    "Delete this activity?"
+                  )
+                }>
+                <Image
+                  source={require('./img/trash.png')}
+                  style={styles.ImageIconStyle}
+                />
+              </TouchableOpacity></View>
+
+            <View style={styles.containerButton}>
+              <TouchableOpacity style={styles.activityButton}>
+                <Text style={styles.activityButtonText}>ACTIVITY 2</Text>
+                <Text style={styles.timeScheduleText}>from 12:30 h</Text>
+                <Text style={styles.timeScheduleText}>to 14:30 h</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.containerButton}>
+              <TouchableOpacity style={styles.activityButton}>
+                <Text style={styles.activityButtonText}>ACTIVITY 3</Text>
+                <Text style={styles.timeScheduleText}>from 15:00 h</Text>
+                <Text style={styles.timeScheduleText}>to 18:30 h</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={styles.containerButton}>
+              <TouchableOpacity style={styles.activityButton}>
+                <Text style={styles.activityButtonText}>ACTIVITY 4</Text>
+                <Text style={styles.timeScheduleText}>from 19:30 h</Text>
+                <Text style={styles.timeScheduleText}>to 21:30 h</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
           <View style={styles.containerButton}>
-            <TouchableOpacity style={styles.activityButton}>
-              <Text style={styles.activityButtonText}>ACTIVITY 2</Text>
-            </TouchableOpacity>
+
+            <GradientButton
+              style={{ marginVertical: 8 }}
+              text="GENERATE ROUTE"
+              textStyle={{ fontSize: 20 }}
+              gradientBegin="#00008b"
+              gradientEnd="#f5ba57"
+              gradientDirection="diagonal"
+              height={60}
+              width={300}
+              radius={15}
+              impact
+              impactStyle='Light'
+              onPressAction={() => this.props.navigation.navigate("Routes")}
+            />
+
           </View>
 
-          <View style={styles.containerButton}>
-            <TouchableOpacity style={styles.activityButton}>
-              <Text style={styles.activityButtonText}>ACTIVITY 3</Text>
-            </TouchableOpacity>
-          </View>
+        </ScrollView>
 
-          <View style={styles.containerButton}>
-            <TouchableOpacity style={styles.activityButton}>
-              <Text style={styles.activityButtonText}>ACTIVITY 4</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
 
-        <View style={styles.containerButton}>
-          
-        <GradientButton
-                        style={{ marginVertical: 8 }}
-                        text="GENERATE ROUTE"
-                        textStyle={{ fontSize: 20 }}
-                        gradientBegin="#00008b"
-                        gradientEnd="#f5ba57"
-                        gradientDirection="diagonal"
-                        height={60}
-                        width={300}
-                        radius={15}
-                        impact
-                        impactStyle='Light'
-                        onPressAction={() => this.props.navigation.navigate("Routes")}
-                    />
-
-        </View>
 
       </View>
     );
@@ -129,7 +146,7 @@ const styles = StyleSheet.create({
     marginBottom: 2,
     backgroundColor: "white",
     width: 260,
-    height: 35,
+    height: 75,
     borderWidth: 2.5,
     borderRadius: 4,
     borderColor: "black",
@@ -154,8 +171,8 @@ const styles = StyleSheet.create({
   },
   ImageIconStyle: {
     margin: 0,
-    height: 50,
-    width: 50,
+    height: 22,
+    width: 20,
     resizeMode: "stretch",
   },
 });

@@ -164,9 +164,9 @@ export default class UserInputs extends React.Component {
               <GradientButton
                 style={{ marginVertical: 8 }}
                 text="PICK START POINT"
-                textStyle={{ fontSize: 10 }}
-                gradientBegin="black"
-                gradientEnd="black"
+                textStyle={{ fontSize: 13 }}
+                gradientBegin="#00008b"
+                gradientEnd="#00008b"
                 gradientDirection="diagonal"
                 height={32}
                 width={175}
@@ -269,6 +269,7 @@ export default class UserInputs extends React.Component {
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
                   checkedColor="red"
+                  color= '#00008b'
                 ></CheckBox>
                 <Text>Taxi</Text>
               </View>
@@ -282,6 +283,7 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
+                  color= '#00008b'
                 ></CheckBox>
                 <Text>Bike</Text>
               </View>
@@ -295,6 +297,7 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
+                  color= '#00008b'
                 ></CheckBox>
                 <Text>Public Transport</Text>
               </View>
@@ -308,6 +311,7 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
+                  color= '#00008b'
                 ></CheckBox>
                 <Text>Private transport</Text>
               </View>
@@ -335,6 +339,7 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
+                  color= '#00008b'
                 ></CheckBox>
                 <Text>Sightseeing</Text>
               </View>
@@ -348,6 +353,7 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
+                  color= '#00008b'
                 ></CheckBox>
                 <Text>Typical food</Text>
               </View>
@@ -361,6 +367,7 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
+                  color= '#00008b'
                 ></CheckBox>
                 <Text>Bars and Music</Text>
               </View>
@@ -374,6 +381,7 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
+                  color= '#00008b'
                 ></CheckBox>
                 <Text>Nightlife and Party</Text>
               </View>
@@ -384,7 +392,7 @@ export default class UserInputs extends React.Component {
         <View style={styles.containerButton}>
           <GradientButton
             style={{ marginVertical: 8 }}
-            text="GENERATE ROUTE"
+            text="DISCOVER"
             textStyle={{ fontSize: 20 }}
             gradientBegin="#00008b"
             gradientEnd="#f5ba57"

@@ -78,7 +78,7 @@ export default class Routes extends React.Component {
                 <View style={styles.containerButton}>
                     <TouchableOpacity style={styles.redoButton}
                         onPress={() =>
-                            this.props.navigation.navigate('Routes')}>
+                            this.props.navigation.navigate('Selection')}>
 
                         <Text style={styles.redoButtonText}>REDO ROUTE</Text>
 
