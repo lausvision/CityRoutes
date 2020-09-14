@@ -16,4 +16,7 @@ export default {
   loadCountries: () => _apiCall("GET", "/countries"),
   loadCities: () => _apiCall("GET", "/cities"),
   loadCitiesfromCountry: () => _apiCall("GET", `/cities/${country.id}`),
+  loadTypologies: () => _apiCall("GET", "/typologies"),
+  loadActivities: () => _apiCall("GET", "/places", payload),
+  loadRoutes: () => _apiCall("GET", "/routes", payload),
 };

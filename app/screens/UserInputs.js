@@ -12,7 +12,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import DateTimePicker from "react-native-modal-datetime-picker";
 import moment from "moment";
 import Slider from "@react-native-community/slider";
-import GradientButton from 'react-native-gradient-buttons';
+import GradientButton from "react-native-gradient-buttons";
 
 export default class UserInputs extends React.Component {
   constructor(props) {
@@ -37,6 +37,10 @@ export default class UserInputs extends React.Component {
       isVisible2: false,
       chosenDate2: "",
       sliderValue: 15,
+      originPoint: {
+        latitude: null,
+        longitude: null,
+      },
     };
   }
 
@@ -83,7 +87,7 @@ export default class UserInputs extends React.Component {
             <DropDownPicker
               style={styles.inputElement}
               // TODO: Obtain countries from the server.
-              // OPTIONAL: Show only countries with places.
+              // OPTIONAL: Show only countries with places.¡
               itemStyle={styles.dropDownItem}
               items={[
                 { label: "United Kingdom", value: "uk" },
@@ -157,7 +161,6 @@ export default class UserInputs extends React.Component {
           <View>
             <Text style={styles.bodyText}>Location</Text>
             <View style={styles.dateTimePickerContainer}>
-
               <GradientButton
                 style={{ marginVertical: 8 }}
                 text="PICK START POINT"
@@ -169,10 +172,9 @@ export default class UserInputs extends React.Component {
                 width={175}
                 radius={4}
                 impact
-                impactStyle='Light'
+                impactStyle="Light"
                 onPressAction={() => this.props.navigation.navigate("Location")}
               />
-
             </View>
           </View>
           <View>
@@ -189,7 +191,7 @@ export default class UserInputs extends React.Component {
                 width={175}
                 radius={4}
                 impact
-                impactStyle='Light'
+                impactStyle="Light"
                 onPressAction={this.showPicker}
               />
               <DateTimePicker
@@ -212,7 +214,7 @@ export default class UserInputs extends React.Component {
                 width={175}
                 radius={4}
                 impact
-                impactStyle='Light'
+                impactStyle="Light"
                 onPressAction={this.showPicker2}
               />
               <DateTimePicker
@@ -236,7 +238,7 @@ export default class UserInputs extends React.Component {
               step={1}
               minimumTrackTintColor="orange"
               maximumTrackTintColor="grey"
-              thumbTintColor='#00008b'
+              thumbTintColor="#00008b"
               value={this.state.sliderValue}
               onValueChange={(sliderValue) => this.setState({ sliderValue })}
               style={{ width: 375, height: 50 }}
@@ -249,8 +251,13 @@ export default class UserInputs extends React.Component {
             </View>
 
             <View style={{ paddingLeft: 30 }}>
-              
-            <View style={{ flexDirection: "row", paddingBottom: 10 , paddingTop: 18}}>    
+              <View
+                style={{
+                  flexDirection: "row",
+                  paddingBottom: 10,
+                  paddingTop: 18,
+                }}
+              >
                 <CheckBox
                   checked={this.state.taxi}
                   onPress={() =>
@@ -259,14 +266,14 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
-                  checkedIcon='dot-circle-o'
-                  uncheckedIcon='circle-o'
-                  checkedColor='red'
+                  checkedIcon="dot-circle-o"
+                  uncheckedIcon="circle-o"
+                  checkedColor="red"
                 ></CheckBox>
                 <Text>Taxi</Text>
-                </View>
+              </View>
 
-                <View style={{ flexDirection: "row", paddingBottom: 10 }}>    
+              <View style={{ flexDirection: "row", paddingBottom: 10 }}>
                 <CheckBox
                   checked={this.state.bike}
                   onPress={() =>
@@ -279,7 +286,7 @@ export default class UserInputs extends React.Component {
                 <Text>Bike</Text>
               </View>
 
-              <View style={{ flexDirection: "row", paddingBottom: 10 }}>    
+              <View style={{ flexDirection: "row", paddingBottom: 10 }}>
                 <CheckBox
                   checked={this.state.publicTransport}
                   onPress={() =>
@@ -292,7 +299,7 @@ export default class UserInputs extends React.Component {
                 <Text>Public Transport</Text>
               </View>
 
-              <View style={{ flexDirection: "row", paddingBottom: 10 }}>    
+              <View style={{ flexDirection: "row", paddingBottom: 10 }}>
                 <CheckBox
                   checked={this.state.privateTransport}
                   onPress={() =>
@@ -313,7 +320,13 @@ export default class UserInputs extends React.Component {
             </View>
 
             <View style={{ paddingLeft: 30 }}>
-            <View style={{ flexDirection: "row", paddingBottom: 10 ,paddingTop: 18}}>    
+              <View
+                style={{
+                  flexDirection: "row",
+                  paddingBottom: 10,
+                  paddingTop: 18,
+                }}
+              >
                 <CheckBox
                   checked={this.state.sightseeing}
                   onPress={() =>
@@ -326,7 +339,7 @@ export default class UserInputs extends React.Component {
                 <Text>Sightseeing</Text>
               </View>
 
-              <View style={{ flexDirection: "row", paddingBottom: 10 }}>    
+              <View style={{ flexDirection: "row", paddingBottom: 10 }}>
                 <CheckBox
                   checked={this.state.typicalFood}
                   onPress={() =>
@@ -339,7 +352,7 @@ export default class UserInputs extends React.Component {
                 <Text>Typical food</Text>
               </View>
 
-              <View style={{ flexDirection: "row", paddingBottom: 10 }}>    
+              <View style={{ flexDirection: "row", paddingBottom: 10 }}>
                 <CheckBox
                   checked={this.state.barsandMusic}
                   onPress={() =>
@@ -352,7 +365,7 @@ export default class UserInputs extends React.Component {
                 <Text>Bars and Music</Text>
               </View>
 
-              <View style={{ flexDirection: "row", paddingBottom: 10 }}>    
+              <View style={{ flexDirection: "row", paddingBottom: 10 }}>
                 <CheckBox
                   checked={this.state.nightlife}
                   onPress={() =>
@@ -369,7 +382,6 @@ export default class UserInputs extends React.Component {
         </ScrollView>
 
         <View style={styles.containerButton}>
-
           <GradientButton
             style={{ marginVertical: 8 }}
             text="GENERATE ROUTE"
@@ -381,10 +393,12 @@ export default class UserInputs extends React.Component {
             width={300}
             radius={15}
             impact
-            impactStyle='Light'
-            onPressAction={() => this.props.navigation.navigate("Selection")}
+            impactStyle="Light"
+            onPressAction={() => {
+              this.props.navigation.navigate("Selection");
+              console.log(this.state);
+            }}
           />
-
         </View>
       </View>
     );
