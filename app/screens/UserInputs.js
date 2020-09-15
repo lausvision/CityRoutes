@@ -24,12 +24,12 @@ export default class UserInputs extends React.Component {
       budgetArray: [],
       mobilityArray: [],
       interestAray: [],
-      taxi: false,
+      walk: false,
       bike: false,
       publicTransport: false,
       privateTransport: false,
       sightseeing: false,
-      typicalFood: false,
+      museums: false,
       barsandMusic: false,
       nightlife: false,
       isVisible: false,
@@ -273,10 +273,10 @@ export default class UserInputs extends React.Component {
                 }}
               >
                 <CheckBox
-                  checked={this.state.taxi}
+                  checked={this.state.walk}
                   onPress={() =>
                     this.setState({
-                      taxi: !this.state.taxi,
+                      walk: !this.state.walk,
                     })
                   }
                   style={{ marginRight: 20 }}
@@ -285,7 +285,7 @@ export default class UserInputs extends React.Component {
                   checkedColor="red"
                   color="#00008b"
                 ></CheckBox>
-                <Text>Taxi</Text>
+                <Text>Walk</Text>
               </View>
 
               <View style={{ flexDirection: "row", paddingBottom: 10 }}>
@@ -360,16 +360,16 @@ export default class UserInputs extends React.Component {
 
               <View style={{ flexDirection: "row", paddingBottom: 10 }}>
                 <CheckBox
-                  checked={this.state.typicalFood}
+                  checked={this.state.museums}
                   onPress={() =>
                     this.setState({
-                      typicalFood: !this.state.typicalFood,
+                      museums: !this.state.museums,
                     })
                   }
                   style={{ marginRight: 20 }}
                   color="#00008b"
                 ></CheckBox>
-                <Text>Typical food</Text>
+                <Text>Museums</Text>
               </View>
 
               <View style={{ flexDirection: "row", paddingBottom: 10 }}>
@@ -417,8 +417,29 @@ export default class UserInputs extends React.Component {
             impact
             impactStyle="Light"
             onPressAction={() => {
+              let mobility = [];
+              this.state.bike ? mobility.push("bicycling") : null;
+              this.state.walk ? mobility.push("walking") : null;
+              this.state.privateTransport ? mobility.push("driving") : null;
+              this.state.publicTransport ? mobility.push("transit") : null;
+              this.setState({
+                mobilityArray: mobility,
+              });
+              let interest = [];
+              this.state.sightseeing ? interest.push(5) : null;
+              this.state.museums ? interest.push(0) : null;
+              this.state.barsandMusic ? interest.push(2) : null;
+              this.state.nightlife ? interest.push(3) : null;
+              this.setState(
+                {
+                  interestAray: interest,
+                },
+                () => {
+                  console.log(interest);
+                  console.log(this.state);
+                }
+              );
               this.props.navigation.navigate("Selection");
-              console.log(this.state);
             }}
           />
         </View>
