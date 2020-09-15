@@ -1,6 +1,7 @@
 require("dotenv").config();
-//const { BASE_URL } = require("./config");
-const BASE_URL = "http://localhost:8080";
+//Update .env file like "BASE_URL=http://serverpage:2739" to modify the server URL
+const { BASE_URL } = require("./config");
+
 
 const _apiCall = async (method, path, payload) => {
   let options = { method, mode: "cors" };
@@ -17,7 +18,8 @@ export default {
   loadCountries: () => _apiCall("GET", "/countries"),
   loadCities: () => _apiCall("GET", "/cities"),
   loadCitiesfromCountry: (country) => _apiCall("GET", `/cities/${country.id}`),
-  loadTypologies: () => _apiCall("GET", "/typologies"),
-  loadActivities: (payload) => _apiCall("GET", "/places", payload),
-  loadRoutes: (payload) => _apiCall("GET", "/routes", payload),
+  loadActivities: (userInputs) => _apiCall("GET",`/places/`, userInputs),
+  loadNewActivities: (removedActivities) => _apiCall("GET",`/new-activities/`, removedActivities),
+  loadRoutes: (definitivePlaces) => _apiCall("GET",`/routes/`, definitivePlaces),
+  loadTypologies: () => _apiCall("GET", "/typologies"),  
 };
