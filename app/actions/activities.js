@@ -3,12 +3,12 @@ import types from './types';
 
 // ALERT: userInputs should have the same structure and names as the server algorithm
 export const loadActivities = (userInputs) => async (dispatch, getState, api) => {
-  dispatch({ type: types.LOAD_STARTED });
+  dispatch({ type: types.LOAD_STARTED_ACTIVITIES });
   try {
     let selectedActivities = await api.loadActivities(userInputs);
-    dispatch({ type: types.LOAD_SUCCEEDED, payload: selectedActivities });
+    dispatch({ type: types.LOAD_SUCCEEDED_ACTIVITIES, payload: selectedActivities });
   } catch (error) {
-    dispatch({ type: types.LOAD_FAILED, payload: error });
+    dispatch({ type: types.LOAD_FAILED_ACTIVITIES, payload: error });
   }
 }
 

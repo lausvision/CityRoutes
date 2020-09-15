@@ -41,10 +41,7 @@ export default class UserInputs extends React.Component {
       chosenHour2: "",
       chosenMinute2: "",
       sliderValue: 15,
-      originPoint: {
-        latitude: null,
-        longitude: null,
-      },
+      originPoint: { latitude: 41.387364, longitude: 2.1675071 },
     };
   }
 
@@ -181,7 +178,9 @@ export default class UserInputs extends React.Component {
                 radius={4}
                 impact
                 impactStyle="Light"
-                onPressAction={() => this.props.navigation.navigate("Location")}
+                onPressAction={() =>
+                  this.props.navigation.navigate("Location", originPoint)
+                }
               />
             </View>
           </View>
@@ -277,7 +276,7 @@ export default class UserInputs extends React.Component {
                   checkedIcon="dot-circle-o"
                   uncheckedIcon="circle-o"
                   checkedColor="red"
-                  color= '#00008b'
+                  color="#00008b"
                 ></CheckBox>
                 <Text>Taxi</Text>
               </View>
@@ -291,7 +290,7 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
-                  color= '#00008b'
+                  color="#00008b"
                 ></CheckBox>
                 <Text>Bike</Text>
               </View>
@@ -305,7 +304,7 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
-                  color= '#00008b'
+                  color="#00008b"
                 ></CheckBox>
                 <Text>Public Transport</Text>
               </View>
@@ -319,7 +318,7 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
-                  color= '#00008b'
+                  color="#00008b"
                 ></CheckBox>
                 <Text>Private transport</Text>
               </View>
@@ -341,13 +340,13 @@ export default class UserInputs extends React.Component {
               >
                 <CheckBox
                   checked={this.state.sightseeing}
-                  onPress={() =>
+                  onPress={() => {
                     this.setState({
                       sightseeing: !this.state.sightseeing,
-                    })
-                  }
+                    });
+                  }}
                   style={{ marginRight: 20 }}
-                  color= '#00008b'
+                  color="#00008b"
                 ></CheckBox>
                 <Text>Sightseeing</Text>
               </View>
@@ -361,7 +360,7 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
-                  color= '#00008b'
+                  color="#00008b"
                 ></CheckBox>
                 <Text>Typical food</Text>
               </View>
@@ -375,7 +374,7 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
-                  color= '#00008b'
+                  color="#00008b"
                 ></CheckBox>
                 <Text>Bars and Music</Text>
               </View>
@@ -389,7 +388,7 @@ export default class UserInputs extends React.Component {
                     })
                   }
                   style={{ marginRight: 20 }}
-                  color= '#00008b'
+                  color="#00008b"
                 ></CheckBox>
                 <Text>Nightlife and Party</Text>
               </View>

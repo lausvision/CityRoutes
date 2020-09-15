@@ -10,12 +10,13 @@ import {
 } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import GradientButton from 'react-native-gradient-buttons';
+import Routes from "./Selection";
 
 export default class Activity extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      x: { latitude: 41.387364, longitude: 2.1675071 },
+      x: { latitude: props.params.latitude, longitude: props.params.longitude },
     };
   }
   render() {
