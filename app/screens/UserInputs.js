@@ -189,6 +189,10 @@ export default class UserInputs extends React.Component {
                   })
                 }
               />
+              <Text>
+                latitude: {Math.round(this.state.originPoint.latitude*1000)/1000} longitude: 
+                {Math.round(this.state.originPoint.longitude*1000)/1000}
+              </Text>
             </View>
           </View>
           <View>
