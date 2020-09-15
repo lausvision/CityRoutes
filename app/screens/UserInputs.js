@@ -14,7 +14,7 @@ import moment from "moment";
 import Slider from "@react-native-community/slider";
 import GradientButton from "react-native-gradient-buttons";
 
-export default class UserInputs extends React.Component  {
+export default class UserInputs extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -81,6 +81,10 @@ export default class UserInputs extends React.Component  {
 
   showPicker2 = () => {
     this.setState({ isVisible2: true });
+  };
+
+  originPointonChange = (value) => {
+    this.setState({ originPoint: value });
   };
 
   render() {
@@ -179,7 +183,10 @@ export default class UserInputs extends React.Component  {
                 impact
                 impactStyle="Light"
                 onPressAction={() =>
-                  this.props.navigation.navigate("Location", this.state.originPoint)
+                  this.props.navigation.navigate("Location", {
+                    point: this.state.originPoint,
+                    other: this.originPointonChange,
+                  })
                 }
               />
             </View>

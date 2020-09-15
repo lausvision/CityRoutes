@@ -13,7 +13,7 @@ import GradientButton from "react-native-gradient-buttons";
 import Routes from "./Selection";
 
 export default function Activity({ navigation, route }) {
-  const [originPoint, setoriginPoint] = React.useState(route.params);
+  const [originPoint, setoriginPoint] = React.useState(route.params.point);
   return (
     <>
       <View style={styles.container}>
@@ -59,8 +59,8 @@ export default function Activity({ navigation, route }) {
                 impact
                 impactStyle="Light"
                 onPressAction={() => {
-                  navigation.navigate("UserInputs", originPoint);
-                  console.log(originPoint);
+                  route.params.other(originPoint);
+                  navigation.navigate("UserInputs");
                 }}
               />
             </View>
