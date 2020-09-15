@@ -14,7 +14,7 @@ import moment from "moment";
 import Slider from "@react-native-community/slider";
 import GradientButton from "react-native-gradient-buttons";
 
-export default class UserInputs extends React.Component {
+export default class UserInputs extends React.Component  {
   constructor(props) {
     super(props);
     this.state = {
@@ -179,7 +179,7 @@ export default class UserInputs extends React.Component {
                 impact
                 impactStyle="Light"
                 onPressAction={() =>
-                  this.props.navigation.navigate("Location", originPoint)
+                  this.props.navigation.navigate("Location", this.state.originPoint)
                 }
               />
             </View>

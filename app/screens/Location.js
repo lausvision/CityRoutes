@@ -9,18 +9,13 @@ import {
   ScrollView,
 } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
-import GradientButton from 'react-native-gradient-buttons';
+import GradientButton from "react-native-gradient-buttons";
 import Routes from "./Selection";
 
-export default class Activity extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      x: { latitude: props.params.latitude, longitude: props.params.longitude },
-    };
-  }
-  render() {
-    return (
+export default function Activity({ navigation, route }) {
+  const [originPoint, setoriginPoint] = React.useState(route.params);
+  return (
+    <>
       <View style={styles.container}>
         <ScrollView style={styles.scrollConatainer}>
           <View style={styles.header}>
@@ -37,45 +32,43 @@ export default class Activity extends React.Component {
               provider={PROVIDER_GOOGLE}
               style={styles.map}
               initialRegion={{
-                latitude: 41.387364,
-                longitude: 2.1675071,
+                latitude: originPoint.latitude,
+                longitude: originPoint.longitude,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
               }}
-              onMarkerDragEnd={(e) =>
-                this.setState({ x: e.nativeEvent.coordinate })
-              }
+              onMarkerDragEnd={(e) => {
+                setoriginPoint(e.nativeEvent.coordinate);
+              }}
             >
-              <Marker draggable coordinate={this.state.x} />
+              <Marker draggable coordinate={originPoint} />
             </MapView>
           </View>
           <View>
             <View style={styles.containerButton}>
-
-            <GradientButton
-            style={{ marginVertical: 8 }}
-            text="LOCATE"
-            textStyle={{ fontSize: 20 }}
-            gradientBegin="#00008b"
-            gradientEnd="#f5ba57"
-            gradientDirection="diagonal"
-            height={60}
-            width={300}
-            radius={15}
-            impact
-            impactStyle='Light'
-            onPressAction={() => {
-              this.props.navigation.navigate("UserInputs");
-              console.log(this.state.x);
-            }}
-          />
-              
+              <GradientButton
+                style={{ marginVertical: 8 }}
+                text="LOCATE"
+                textStyle={{ fontSize: 20 }}
+                gradientBegin="#00008b"
+                gradientEnd="#f5ba57"
+                gradientDirection="diagonal"
+                height={60}
+                width={300}
+                radius={15}
+                impact
+                impactStyle="Light"
+                onPressAction={() => {
+                  navigation.navigate("UserInputs", originPoint);
+                  console.log(originPoint);
+                }}
+              />
             </View>
           </View>
         </ScrollView>
       </View>
-    );
-  }
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
