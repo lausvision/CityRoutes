@@ -34,8 +34,12 @@ export default class UserInputs extends React.Component {
       nightlife: false,
       isVisible: false,
       chosenDate: "",
+      chosenHour: "",
+      chosenMinute: "",
       isVisible2: false,
       chosenDate2: "",
+      chosenHour2: "",
+      chosenMinute2: "",
       sliderValue: 15,
       originPoint: {
         latitude: null,
@@ -48,6 +52,8 @@ export default class UserInputs extends React.Component {
     this.setState({
       isVisible: false,
       chosenDate: moment(datetime).format("MMMM, Do YYYY HH:mm"),
+      chosenHour: moment(datetime).format("HH"),
+      chosenMinute: moment(datetime).format("mm"),
     });
   };
 
@@ -65,6 +71,8 @@ export default class UserInputs extends React.Component {
     this.setState({
       isVisible2: false,
       chosenDate2: moment(datetime).format("MMMM, Do YYYY HH:mm"),
+      chosenHour2: moment(datetime).format("HH"),
+      chosenMinute2: moment(datetime).format("mm"),
     });
   };
 
