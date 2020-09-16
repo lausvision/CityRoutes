@@ -444,11 +444,19 @@ export default class UserInputs extends React.Component {
                   interestArray: interest,
                 },
                 () => {
-                  console.log(interest);
                   console.log(this.state);
                 }
               );
-              this.props.navigation.navigate("Selection");
+              this.props.navigation.navigate("Selection",{
+                country : this.state.country,
+                city : this.state.city,
+                typology : this.state.interestArray[0],
+                travelmode : this.state.mobilityArray[0],
+                userTimeHours : [Number.parseInt(this.state.chosenHour),Number.parseInt(this.state.chosenHour2)],
+                userTimeMinutes : [Number.parseInt(this.state.chosenMinute),Number.parseInt(this.state.chosenMinute2)],
+                originMap : this.state.originPoint,
+                userBudget : this.state.sliderValue
+              });
             }}
           />
         </View>
