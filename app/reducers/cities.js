@@ -8,21 +8,21 @@ const initialState = {
 
 const citiesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.LOAD_STARTED: {
+    case types.LOAD_STARTED_CITIES: {
       return {
         ...state,
         error: null,
         loading: true,
       };
     }
-    case types.LOAD_FAILED: {
+    case types.LOAD_FAILED_CITIES: {
       return {
         ...state,
         loading: false,
         error: action.payload,
       };
     }
-    case types.LOAD_SUCCEEDED: {
+    case types.LOAD_SUCCEEDED_CITIES: {
       return {
         ...state,
         loading: false,
