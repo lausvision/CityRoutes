@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+//import { useDispatch } from "react-redux";
+import { loadActivities, loadNewActivities } from "../actions/activities";
 import {
   StyleSheet,
   Text,
@@ -7,14 +9,16 @@ import {
   Image,
   Button,
   Alert,
-  ScrollView
+  ScrollView,
 } from "react-native";
+import GradientButton from "react-native-gradient-buttons";
 
-import GradientButton from 'react-native-gradient-buttons';
-
-export default class Routes extends React.Component {
-  render() {
-    return (
+export default function selection({ navigation, route }) {
+  const [activityList, setactivityList] = useState(null);
+  //useEffect(() => setactivityList(loadActivities(route.params)));
+  //console.log(activityList);
+  return (
+    <>
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.headerText}>Activity selection</Text>
@@ -28,51 +32,41 @@ export default class Routes extends React.Component {
                 onPress={() => this.props.navigation.navigate("Activity")}
               >
                 <Text style={styles.activityButtonText}>ACTIVITY 1</Text>
-                <Text style={styles.timeScheduleText}>from 10:00 h</Text>
-                <Text style={styles.timeScheduleText}>to 12:00 h</Text>
               </TouchableOpacity>
             </View>
 
             <View>
-              <TouchableOpacity activeOpacity={0.5}
-                 onPress={() =>
-                  Alert.alert(
-                    "Delete this activity?"
-                  )
-                }>
+              <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => Alert.alert("Delete this activity?")}
+              >
                 <Image
-                  source={require('./img/trash.png')}
+                  source={require("./img/trash.png")}
                   style={styles.ImageIconStyle}
                 />
-              </TouchableOpacity></View>
+              </TouchableOpacity>
+            </View>
 
             <View style={styles.containerButton}>
               <TouchableOpacity style={styles.activityButton}>
                 <Text style={styles.activityButtonText}>ACTIVITY 2</Text>
-                <Text style={styles.timeScheduleText}>from 12:30 h</Text>
-                <Text style={styles.timeScheduleText}>to 14:30 h</Text>
               </TouchableOpacity>
             </View>
 
             <View style={styles.containerButton}>
               <TouchableOpacity style={styles.activityButton}>
                 <Text style={styles.activityButtonText}>ACTIVITY 3</Text>
-                <Text style={styles.timeScheduleText}>from 15:00 h</Text>
-                <Text style={styles.timeScheduleText}>to 18:30 h</Text>
               </TouchableOpacity>
             </View>
 
             <View style={styles.containerButton}>
               <TouchableOpacity style={styles.activityButton}>
                 <Text style={styles.activityButtonText}>ACTIVITY 4</Text>
-                <Text style={styles.timeScheduleText}>from 19:30 h</Text>
-                <Text style={styles.timeScheduleText}>to 21:30 h</Text>
               </TouchableOpacity>
             </View>
           </View>
 
           <View style={styles.containerButton}>
-
             <GradientButton
               style={{ marginVertical: 8 }}
               text="GENERATE ROUTE"
@@ -84,19 +78,14 @@ export default class Routes extends React.Component {
               width={300}
               radius={15}
               impact
-              impactStyle='Light'
-              onPressAction={() => this.props.navigation.navigate("Routes")}
+              impactStyle="Light"
+              onPressAction={() => navigation.navigate("Routes")}
             />
-
           </View>
-
         </ScrollView>
-
-
-
       </View>
-    );
-  }
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
