@@ -23,7 +23,7 @@ export default class UserInputs extends React.Component {
       timeArray: [],
       budgetArray: [],
       mobilityArray: [],
-      interestAray: [],
+      interestArray: [],
       walk: false,
       bike: false,
       publicTransport: false,
@@ -91,6 +91,7 @@ export default class UserInputs extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.scrollConatainer}>
+          {/*--------------------------------- Countries dropdown ---------------------------------*/}
           <View style={styles.inputContainer}>
             <Text style={styles.bodyText}>Country</Text>
             <DropDownPicker
@@ -126,6 +127,7 @@ export default class UserInputs extends React.Component {
             />
           </View>
 
+          {/*--------------------------------- Cities dropdown ---------------------------------*/}
           <View style={styles.inputContainer}>
             <Text style={styles.bodyText}>City</Text>
             <DropDownPicker
@@ -167,6 +169,8 @@ export default class UserInputs extends React.Component {
               searchableError={() => <Text>Not Found</Text>}
             />
           </View>
+
+          {/*--------------------------------- Location selector ---------------------------------*/}
           <View>
             <Text style={styles.bodyText}>Location</Text>
             <View style={styles.dateTimePickerContainer}>
@@ -190,11 +194,15 @@ export default class UserInputs extends React.Component {
                 }
               />
               <Text>
-                latitude: {Math.round(this.state.originPoint.latitude*1000)/1000} longitude: 
-                {Math.round(this.state.originPoint.longitude*1000)/1000}
+                latitude:{" "}
+                {Math.round(this.state.originPoint.latitude * 1000) / 1000}{" "}
+                longitude:
+                {Math.round(this.state.originPoint.longitude * 1000) / 1000}
               </Text>
             </View>
           </View>
+
+          {/*--------------------------------- Time selector ---------------------------------*/}
           <View>
             <Text style={styles.bodyText}>Time Slot</Text>
             <View style={styles.dateTimePickerContainer}>
@@ -245,6 +253,8 @@ export default class UserInputs extends React.Component {
               <Text>{this.state.chosenDate2}</Text>
             </View>
           </View>
+
+          {/*--------------------------------- Budget selector ---------------------------------*/}
           <View>
             <Text style={styles.bodyText}>Budget</Text>
             <Text style={{ paddingLeft: 30 }}>
@@ -263,150 +273,145 @@ export default class UserInputs extends React.Component {
             ></Slider>
           </View>
 
+          {/*--------------------------------- Mobility selector ---------------------------------*/}
           <View style={{ flexDirection: "row", paddingBottom: 10 }}>
             <View>
-              <Text style={styles.bodyText}>Mobility</Text>
+              <Text style={styles.leftTitle}>Mobility</Text>
             </View>
 
-            <View style={{ paddingLeft: 30 }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  paddingBottom: 10,
-                  paddingTop: 18,
-                }}
-              >
-                <CheckBox
-                  checked={this.state.walk}
-                  onPress={() =>
-                    this.setState({
-                      walk: !this.state.walk,
-                    })
-                  }
-                  style={{ marginRight: 20 }}
-                  checkedIcon="dot-circle-o"
-                  uncheckedIcon="circle-o"
-                  checkedColor="red"
-                  color="#00008b"
-                ></CheckBox>
-                <Text>Walk</Text>
-              </View>
+            <View style={{ paddingTop: 18 }}>
+              <View style={{ paddingLeft: 30 }}>
+                <View style={styles.checkboxContainer}>
+                  <CheckBox
+                    checked={this.state.walk}
+                    onPress={() =>
+                      this.setState({
+                        walk: !this.state.walk,
+                      })
+                    }
+                    style={styles.checkboxInput}
+                    checkedIcon="dot-circle-o"
+                    uncheckedIcon="circle-o"
+                    checkedColor="red"
+                    color="#00008b"
+                  ></CheckBox>
+                  <Text>Walk</Text>
+                </View>
 
-              <View style={{ flexDirection: "row", paddingBottom: 10 }}>
-                <CheckBox
-                  checked={this.state.bike}
-                  onPress={() =>
-                    this.setState({
-                      bike: !this.state.bike,
-                    })
-                  }
-                  style={{ marginRight: 20 }}
-                  color="#00008b"
-                ></CheckBox>
-                <Text>Bike</Text>
-              </View>
+                <View style={styles.checkboxContainer}>
+                  <CheckBox
+                    checked={this.state.bike}
+                    onPress={() =>
+                      this.setState({
+                        bike: !this.state.bike,
+                      })
+                    }
+                    style={styles.checkboxInput}
+                    color="#00008b"
+                  ></CheckBox>
+                  <Text>Bike</Text>
+                </View>
 
-              <View style={{ flexDirection: "row", paddingBottom: 10 }}>
-                <CheckBox
-                  checked={this.state.publicTransport}
-                  onPress={() =>
-                    this.setState({
-                      publicTransport: !this.state.publicTransport,
-                    })
-                  }
-                  style={{ marginRight: 20 }}
-                  color="#00008b"
-                ></CheckBox>
-                <Text>Public Transport</Text>
-              </View>
+                <View style={styles.checkboxContainer}>
+                  <CheckBox
+                    checked={this.state.publicTransport}
+                    onPress={() =>
+                      this.setState({
+                        publicTransport: !this.state.publicTransport,
+                      })
+                    }
+                    style={styles.checkboxInput}
+                    color="#00008b"
+                  ></CheckBox>
+                  <Text>Public Transport</Text>
+                </View>
 
-              <View style={{ flexDirection: "row", paddingBottom: 10 }}>
-                <CheckBox
-                  checked={this.state.privateTransport}
-                  onPress={() =>
-                    this.setState({
-                      privateTransport: !this.state.privateTransport,
-                    })
-                  }
-                  style={{ marginRight: 20 }}
-                  color="#00008b"
-                ></CheckBox>
-                <Text>Private transport</Text>
+                <View style={styles.checkboxContainer}>
+                  <CheckBox
+                    checked={this.state.privateTransport}
+                    onPress={() =>
+                      this.setState({
+                        privateTransport: !this.state.privateTransport,
+                      })
+                    }
+                    style={styles.checkboxInput}
+                    color="#00008b"
+                  ></CheckBox>
+                  <Text>Private transport</Text>
+                </View>
               </View>
             </View>
           </View>
 
+          {/*--------------------------------- Interests selector ---------------------------------*/}
           <View style={{ flexDirection: "row" }}>
             <View>
-              <Text style={styles.bodyText}>Interest</Text>
+              <Text style={styles.leftTitle}>Interest</Text>
             </View>
 
-            <View style={{ paddingLeft: 30 }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  paddingBottom: 10,
-                  paddingTop: 18,
-                }}
-              >
-                <CheckBox
-                  checked={this.state.sightseeing}
-                  onPress={() => {
-                    this.setState({
-                      sightseeing: !this.state.sightseeing,
-                    });
-                  }}
-                  style={{ marginRight: 20 }}
-                  color="#00008b"
-                ></CheckBox>
-                <Text>Sightseeing</Text>
-              </View>
+            <View style={{ paddingTop: 18 }}>
+              <View style={{ paddingLeft: 30 }}>
+                <View style={styles.checkboxContainer}>
+                  <CheckBox
+                    checked={this.state.sightseeing}
+                    onPress={() => {
+                      this.setState({
+                        sightseeing: !this.state.sightseeing,
+                      });
+                    }}
+                    style={styles.checkboxInput}
+                    color="#00008b"
+                  ></CheckBox>
+                  <Text>Sightseeing</Text>
+                </View>
 
-              <View style={{ flexDirection: "row", paddingBottom: 10 }}>
-                <CheckBox
-                  checked={this.state.museums}
-                  onPress={() =>
-                    this.setState({
-                      museums: !this.state.museums,
-                    })
-                  }
-                  style={{ marginRight: 20 }}
-                  color="#00008b"
-                ></CheckBox>
-                <Text>Museums</Text>
-              </View>
+                <View style={styles.checkboxContainer}>
+                  <CheckBox
+                    checked={this.state.museums}
+                    onPress={() =>
+                      this.setState({
+                        museums: !this.state.museums,
+                      })
+                    }
+                    style={styles.checkboxInput}
+                    color="#00008b"
+                  ></CheckBox>
+                  <Text>Museums</Text>
+                </View>
 
-              <View style={{ flexDirection: "row", paddingBottom: 10 }}>
-                <CheckBox
-                  checked={this.state.barsandMusic}
-                  onPress={() =>
-                    this.setState({
-                      barsandMusic: !this.state.barsandMusic,
-                    })
-                  }
-                  style={{ marginRight: 20 }}
-                  color="#00008b"
-                ></CheckBox>
-                <Text>Bars and Music</Text>
-              </View>
+                <View style={styles.checkboxContainer}>
+                  <CheckBox
+                    checked={this.state.barsandMusic}
+                    onPress={() =>
+                      this.setState({
+                        barsandMusic: !this.state.barsandMusic,
+                      })
+                    }
+                    style={styles.checkboxInput}
+                    color="#00008b"
+                  ></CheckBox>
+                  <Text>Bars and Music</Text>
+                </View>
 
-              <View style={{ flexDirection: "row", paddingBottom: 10 }}>
-                <CheckBox
-                  checked={this.state.nightlife}
-                  onPress={() =>
-                    this.setState({
-                      nightlife: !this.state.nightlife,
-                    })
-                  }
-                  style={{ marginRight: 20 }}
-                  color="#00008b"
-                ></CheckBox>
-                <Text>Nightlife and Party</Text>
+                <View style={styles.checkboxContainer}>
+                  <CheckBox
+                    checked={this.state.nightlife}
+                    onPress={() =>
+                      this.setState({
+                        nightlife: !this.state.nightlife,
+                      })
+                    }
+                    style={styles.checkboxInput}
+                    color="#00008b"
+                  ></CheckBox>
+                  <Text>Nightlife and Party</Text>
+                </View>
               </View>
             </View>
           </View>
         </ScrollView>
 
+        {/*--------------------------------- Discover button ---------------------------------*/}
         <View style={styles.containerButton}>
           <GradientButton
             style={{ marginVertical: 8 }}
@@ -436,7 +441,7 @@ export default class UserInputs extends React.Component {
               this.state.nightlife ? interest.push(3) : null;
               this.setState(
                 {
-                  interestAray: interest,
+                  interestArray: interest,
                 },
                 () => {
                   console.log(interest);
@@ -450,6 +455,10 @@ export default class UserInputs extends React.Component {
       </View>
     );
   }
+}
+
+{
+  /*--------------------------------- Stylesheet ---------------------------------*/
 }
 
 const styles = StyleSheet.create({
@@ -511,5 +520,18 @@ const styles = StyleSheet.create({
   dateTimePickerContainer: {
     paddingLeft: 150,
     paddingRight: 20,
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+    paddingBottom: 10,
+  },
+  checkboxInput: {
+    marginRight: 20,
+  },
+  leftTitle: {
+    fontSize: 18,
+    paddingLeft: 30,
+    paddingBottom: 18,
+    paddingTop: 10,
   },
 });
