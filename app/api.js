@@ -25,6 +25,6 @@ export default {
   loadNewActivities: (removedActivities) =>
     _apiCall("GET", `/new-activities/`, removedActivities),
   loadRoutes: (definitivePlaces) =>
-    _apiCall("GET", `/routes/`, definitivePlaces),
+    _apiCall("POST", `/routes/`, definitivePlaces),
   loadTypologies: () => _apiCall("GET", "/typologies"),
 };

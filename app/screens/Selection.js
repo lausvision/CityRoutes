@@ -104,7 +104,12 @@ export default function selection({ navigation, route }) {
                 radius={15}
                 impact
                 impactStyle="Light"
-                onPressAction={() => navigation.navigate("Routes")}
+                onPressAction={() => navigation.navigate("Routes",{
+                  originMap: route.params.originMap,
+                  travelMode: route.params.travelMode,
+                  userTimeHours: route.params.userTimeHours,
+                  userTimeMinutes:route.params.userTimeMinutes,
+                })}
               />
             </View>
           </ScrollView>

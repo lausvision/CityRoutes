@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadRoutes } from "../actions/routes";
 import { StyleSheet, Text, View, TouchableOpacity, Image } from "react-native";
 
 import GradientButton from "react-native-gradient-buttons";
 
-export default class Routes extends React.Component {
-  render() {
-    return (
+export default function Routes({ navigation, route }) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(
+      loadRoutes({
+        activities: activities,
+        originMap: route.params.originMap,
+        travelMode: route.params.travelMode,
+        userTimeHours: route.params.userTimeHours,
+        userTimeMinutes: route.params.userTimeMinutes,
+      })
+    );
+  }, []);
+  const activities = useSelector((state) => state.activities.activities);
+  const routes = useSelector((state) => state.routes.routes);
+  const load = useSelector((state) => state.routes.loading);
+  const error = useSelector((state) => state.routes.error);
+  return (
+    <>
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.headerText}>Time Schedule</Text>
@@ -15,7 +33,7 @@ export default class Routes extends React.Component {
           <View style={styles.containerButton}>
             <TouchableOpacity
               style={styles.activityButton}
-              onPress={() => this.props.navigation.navigate("Activity")}
+              onPress={() => navigation.navigate("Activity")}
             >
               <Text style={styles.activityButtonText}>ACTIVITY 1</Text>
             </TouchableOpacity>
@@ -24,7 +42,7 @@ export default class Routes extends React.Component {
           <View style={styles.arrowRightContainer}>
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => this.props.navigation.navigate("Transfer")}
+              onPress={() => navigation.navigate("Transfer")}
             >
               <Image
                 source={require("./img/rightArrow.png")}
@@ -71,7 +89,7 @@ export default class Routes extends React.Component {
         <View style={styles.containerButton}>
           <TouchableOpacity
             style={styles.redoButton}
-            onPress={() => this.props.navigation.navigate("Selection")}
+            onPress={() => navigation.navigate("Selection")}
           >
             <Text style={styles.redoButtonText}>REDO ROUTE</Text>
           </TouchableOpacity>
@@ -90,12 +108,12 @@ export default class Routes extends React.Component {
             radius={15}
             impact
             impactStyle="Light"
-            onPressAction={() => this.props.navigation.navigate("Routes")}
+            onPressAction={() => navigation.navigate("Routes")}
           />
         </View>
       </View>
-    );
-  }
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
