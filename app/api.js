@@ -1,6 +1,6 @@
-require("dotenv").config();
+
 //Update .env file like "BASE_URL=http://serverpage:2739" to modify the server URL
-const { BASE_URL } = require("./config");
+import { BASE_URL } from '@env'
 
 
 const _apiCall = async (method, path, payload) => {
