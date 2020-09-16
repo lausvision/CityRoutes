@@ -6,11 +6,11 @@ import api from './api';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootReducer = combineReducers ({
-  activitiesReducer,
-  citiesReducer,
-  countriesReducer,
-  typologiesReducer,
-  routesReducer
+  activities: activitiesReducer,
+  cities: citiesReducer,
+  countries: countriesReducer,
+  typologies: typologiesReducer,
+  routes: routesReducer
 })
 
 export const store = createStore(
