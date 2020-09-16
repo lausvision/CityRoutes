@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-//import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadActivities, loadNewActivities } from "../actions/activities";
 import {
   StyleSheet,
@@ -13,79 +13,105 @@ import {
 } from "react-native";
 import GradientButton from "react-native-gradient-buttons";
 
+const getListFromApiAsync = async () => {
+  try {
+    let response = await fetch("http://192.168.148.17:8080/api/places");
+    let json = await response.json();
+    console.log(json);
+    return json;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export default function selection({ navigation, route }) {
-  const [activityList, setactivityList] = useState(null);
-  //useEffect(() => setactivityList(loadActivities(route.params)));
-  //console.log(activityList);
-  return (
-    <>
-      <View style={styles.container}>
+  //getListFromApiAsync();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadActivities(route.params));
+  }, []);
+  const activities = useSelector((state) => state.activities.activities);
+  const load = useSelector((state) => state.activities.loading);
+  const error = useSelector((state) => state.activities.error);
+  if (load) {
+    return (
+      <>
         <View style={styles.header}>
-          <Text style={styles.headerText}>Activity selection</Text>
+          <Text style={styles.headerText}>LOADING...</Text>
         </View>
-
-        <ScrollView style={styles.scrollConatainer}>
-          <View style={styles.containerButton}>
-            <View style={styles.containerButton}>
-              <TouchableOpacity
-                style={styles.activityButton}
-                onPress={() => this.props.navigation.navigate("Activity")}
-              >
-                <Text style={styles.activityButtonText}>ACTIVITY 1</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View>
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => Alert.alert("Delete this activity?")}
-              >
-                <Image
-                  source={require("./img/trash.png")}
-                  style={styles.ImageIconStyle}
-                />
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.containerButton}>
-              <TouchableOpacity style={styles.activityButton}>
-                <Text style={styles.activityButtonText}>ACTIVITY 2</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.containerButton}>
-              <TouchableOpacity style={styles.activityButton}>
-                <Text style={styles.activityButtonText}>ACTIVITY 3</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.containerButton}>
-              <TouchableOpacity style={styles.activityButton}>
-                <Text style={styles.activityButtonText}>ACTIVITY 4</Text>
-              </TouchableOpacity>
-            </View>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <Text style={styles.headerText}>Activity selection</Text>
           </View>
 
-          <View style={styles.containerButton}>
-            <GradientButton
-              style={{ marginVertical: 8 }}
-              text="GENERATE ROUTE"
-              textStyle={{ fontSize: 20 }}
-              gradientBegin="#00008b"
-              gradientEnd="#f5ba57"
-              gradientDirection="diagonal"
-              height={60}
-              width={300}
-              radius={15}
-              impact
-              impactStyle="Light"
-              onPressAction={() => navigation.navigate("Routes")}
-            />
-          </View>
-        </ScrollView>
-      </View>
-    </>
-  );
+          <ScrollView style={styles.scrollConatainer}>
+            <View style={styles.containerButton}>
+              {activities.map((obj, index) => {
+                return (
+                  <>
+                    <View style={styles.containerButton}>
+                      <TouchableOpacity
+                        style={styles.activityButton}
+                        onPress={() =>
+                          navigation.navigate("Activity", {
+                            name: obj.name,
+                            price: obj.price,
+                            latitude: obj.latitude,
+                            longitude: obj.longitude,
+                            rating: obj.rating,
+                            reviews: obj.reviews,
+                            origin: route.params.originMap
+                          })
+                        }
+                      >
+                        <Text style={styles.activityButtonText}>
+                          {obj.name.toString()}
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+
+                    <View>
+                      <TouchableOpacity
+                        activeOpacity={0.5}
+                        onPress={() => Alert.alert("Delete this activity?")}
+                      >
+                        <Image
+                          source={require("./img/trash.png")}
+                          style={styles.ImageIconStyle}
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  </>
+                );
+              })}
+            </View>
+
+            <View style={styles.containerButton}>
+              <GradientButton
+                style={{ marginVertical: 8 }}
+                text="GENERATE ROUTE"
+                textStyle={{ fontSize: 20 }}
+                gradientBegin="#00008b"
+                gradientEnd="#f5ba57"
+                gradientDirection="diagonal"
+                height={60}
+                width={300}
+                radius={15}
+                impact
+                impactStyle="Light"
+                onPressAction={() => navigation.navigate("Routes")}
+              />
+            </View>
+          </ScrollView>
+        </View>
+      </>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
