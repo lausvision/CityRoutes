@@ -22,7 +22,7 @@ export default {
   loadCities: () => _apiCall("GET", "/cities"),
   loadCitiesfromCountry: (country) => _apiCall("GET", `/cities/${country.id}`),
   loadActivities: (userInputs) => _apiCall("POST", `/places/`, userInputs),
-  loadNewActivities: (removedActivities) => _apiCall("GET", `/new-activities/`, removedActivities),
+  loadNewActivities: (removedActivities) => _apiCall("POST", `/new-activities/`, removedActivities),
   loadRoutes: (definitivePlaces) => _apiCall("POST", `/routes/`, definitivePlaces),
   loadTypologies: () => _apiCall("GET", "/typologies"),
 };

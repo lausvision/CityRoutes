@@ -13,8 +13,8 @@ import {
 import GradientButton from "react-native-gradient-buttons";
 
 export default function Routes({ navigation, route }) {
-  const dispatch = useDispatch();
   const activities = useSelector((state) => state.activities.activities);
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(
       loadRoutes({
@@ -35,6 +35,15 @@ export default function Routes({ navigation, route }) {
       <>
         <View style={styles.header}>
           <Text style={styles.headerText}>LOADING...</Text>
+        </View>
+      </>
+    );
+  } else if (error) {
+    return (
+      <>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>ERROR...</Text>
+          <Text style={styles.subheaderText}>{error}</Text>
         </View>
       </>
     );

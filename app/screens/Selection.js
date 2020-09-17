@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadActivities, loadNewActivities } from "../actions/activities";
+import { loadRoutes } from "../actions/routes";
 import {
   StyleSheet,
   Text,
@@ -29,6 +30,15 @@ export default function selection({ navigation, route }) {
         </View>
       </>
     );
+  } else if (error) {
+    return (
+      <>
+        <View style={styles.header}>
+          <Text style={styles.headerText}>ERROR...</Text>
+          <Text style={styles.subheaderText}>{error}</Text>
+        </View>
+      </>
+    );
   } else {
     return (
       <>
@@ -53,7 +63,7 @@ export default function selection({ navigation, route }) {
                             longitude: obj.longitude,
                             rating: obj.rating,
                             reviews: obj.reviews,
-                            origin: route.params.originMap
+                            origin: route.params.originMap,
                           })
                         }
                       >
@@ -92,12 +102,23 @@ export default function selection({ navigation, route }) {
                 radius={15}
                 impact
                 impactStyle="Light"
-                onPressAction={() => navigation.navigate("Routes",{
-                  originMap: route.params.originMap,
-                  travelMode: route.params.travelmode,
-                  userTimeHours: route.params.userTimeHours,
-                  userTimeMinutes:route.params.userTimeMinutes,
-                })}
+                onPressAction={() => {
+                  dispatch(
+                    loadRoutes({
+                      activities: activities,
+                      originMap: route.params.originMap,
+                      travelMode: route.params.travelMode,
+                      userTimeHours: route.params.userTimeHours,
+                      userTimeMinutes: route.params.userTimeMinutes,
+                    })
+                  );
+                  navigation.navigate("Routes", {
+                    originMap: route.params.originMap,
+                    travelMode: route.params.travelmode,
+                    userTimeHours: route.params.userTimeHours,
+                    userTimeMinutes: route.params.userTimeMinutes,
+                  });
+                }}
               />
             </View>
           </ScrollView>
