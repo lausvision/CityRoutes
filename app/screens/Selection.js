@@ -13,19 +13,7 @@ import {
 } from "react-native";
 import GradientButton from "react-native-gradient-buttons";
 
-const getListFromApiAsync = async () => {
-  try {
-    let response = await fetch("http://192.168.148.17:8080/api/places");
-    let json = await response.json();
-    console.log(json);
-    return json;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 export default function selection({ navigation, route }) {
-  //getListFromApiAsync();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadActivities(route.params));
@@ -106,7 +94,7 @@ export default function selection({ navigation, route }) {
                 impactStyle="Light"
                 onPressAction={() => navigation.navigate("Routes",{
                   originMap: route.params.originMap,
-                  travelMode: route.params.travelMode,
+                  travelMode: route.params.travelmode,
                   userTimeHours: route.params.userTimeHours,
                   userTimeMinutes:route.params.userTimeMinutes,
                 })}

@@ -13,7 +13,7 @@ const _apiCall = async (method, path, payload) => {
     const result = await response.json();
     return result;
   } catch (e) {
-    console.log(e);
+    console.log(e.json());
   }
 };
 
@@ -22,9 +22,7 @@ export default {
   loadCities: () => _apiCall("GET", "/cities"),
   loadCitiesfromCountry: (country) => _apiCall("GET", `/cities/${country.id}`),
   loadActivities: (userInputs) => _apiCall("POST", `/places/`, userInputs),
-  loadNewActivities: (removedActivities) =>
-    _apiCall("GET", `/new-activities/`, removedActivities),
-  loadRoutes: (definitivePlaces) =>
-    _apiCall("POST", `/routes/`, definitivePlaces),
+  loadNewActivities: (removedActivities) => _apiCall("GET", `/new-activities/`, removedActivities),
+  loadRoutes: (definitivePlaces) => _apiCall("POST", `/routes/`, definitivePlaces),
   loadTypologies: () => _apiCall("GET", "/typologies"),
 };
