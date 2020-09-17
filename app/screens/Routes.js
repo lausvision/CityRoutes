@@ -51,6 +51,9 @@ export default function Routes({ navigation, route }) {
               <View style={styles.containerButton}>
                 <TouchableOpacity style={styles.activityButton}>
                   <Text style={styles.activityButtonText}>Origin Point</Text>
+                  <Text style={styles.subheaderText}>
+                    Start: {routes[1][0].toString()} h
+                  </Text>
                 </TouchableOpacity>
               </View>
               {routes[0].map((obj, index) => {
@@ -60,7 +63,29 @@ export default function Routes({ navigation, route }) {
                       <View style={styles.arrowRightContainer}>
                         <TouchableOpacity
                           activeOpacity={0.5}
-                          onPress={() => navigation.navigate("Transfer")}
+                          onPress={() =>
+                            navigation.navigate("Transfer", {
+                              originMap: route.params.originMap,
+                              travelMode: route.params.travelMode,
+                              travelTime: routes[3][index].duration.value,
+                              to: obj.name,
+                              from:
+                                index == 0
+                                  ? "Origin Point"
+                                  : routes[0][index - 1].name,
+                              toLocation: {
+                                latitude: obj.latitude,
+                                longitude: obj.longitude,
+                              },
+                              fromLocation:
+                                index == 0
+                                  ? route.params.originMap
+                                  : {
+                                      latitude: routes[0][index - 1].latitude,
+                                      longitude: routes[0][index - 1].longitude,
+                                    },
+                            })
+                          }
                         >
                           <Image
                             source={require("./img/rightArrow.png")}
@@ -86,6 +111,10 @@ export default function Routes({ navigation, route }) {
                           <Text style={styles.activityButtonText}>
                             {obj.name.toString()}
                           </Text>
+                          <Text style={styles.subheaderText}>
+                            Start: {routes[1][(index + 1) * 2 - 1].toString()} h
+                            / Finish: {routes[1][(index + 1) * 2].toString()} h
+                          </Text>
                         </TouchableOpacity>
                       </View>
                     </>
@@ -93,7 +122,32 @@ export default function Routes({ navigation, route }) {
                 } else {
                   return (
                     <>
-                      <TouchableOpacity activeOpacity={0.5}>
+                      <TouchableOpacity
+                        activeOpacity={0.5}
+                        onPress={() =>
+                          navigation.navigate("Transfer", {
+                            originMap: route.params.originMap,
+                            travelMode: route.params.travelMode,
+                            travelTime: routes[3][index].duration.value,
+                            to: obj.name,
+                            from:
+                              index == 0
+                                ? "Origin Point"
+                                : routes[0][index - 1].name,
+                            toLocation: {
+                              latitude: obj.latitude,
+                              longitude: obj.longitude,
+                            },
+                            fromLocation:
+                              index == 0
+                                ? route.params.originMap
+                                : {
+                                    latitude: routes[0][index - 1].latitude,
+                                    longitude: routes[0][index - 1].longitude,
+                                  },
+                          })
+                        }
+                      >
                         <Image
                           source={require("./img/leftArrow.png")}
                           style={styles.ImageIconStyle}
@@ -116,6 +170,10 @@ export default function Routes({ navigation, route }) {
                         >
                           <Text style={styles.activityButtonText}>
                             {obj.name.toString()}
+                          </Text>
+                          <Text style={styles.subheaderText}>
+                            Start: {routes[1][(index + 1) * 2 - 1].toString()} h
+                            / Finish: {routes[1][(index + 1) * 2].toString()} h
                           </Text>
                         </TouchableOpacity>
                       </View>
@@ -158,8 +216,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   subheaderText: {
-    fontSize: 15,
-    paddingLeft: 20,
+    fontSize: 12,
     paddingBottom: 5,
     fontWeight: "100",
   },
@@ -193,7 +250,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     marginBottom: 2,
     backgroundColor: "white",
-    width: 260,
+    width: 280,
     height: 75,
     borderWidth: 2.5,
     borderRadius: 4,

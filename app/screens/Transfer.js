@@ -19,18 +19,9 @@ import MapViewDirections from "react-native-maps-directions";
 import getDirections from "react-native-google-maps-directions";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 
-export default class Transfer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      from: "",
-      to: "",
-      route: {},
-    };
-  }
-
-  render() {
-    return (
+export default function Transfer({ navigation, route }) {
+  return (
+    <>
       <View style={styles.container}>
         <ScrollView style={styles.scrollConatainer}>
           <View style={styles.pricebuttonContainer}>
@@ -39,9 +30,14 @@ export default class Transfer extends React.Component {
             </TouchableOpacity>
           </View>
           <View>
-            <Text style={styles.subheaderText}>From: {this.props.from}</Text>
-            <Text style={styles.subheaderText}>To: {this.props.to}</Text>
-            <Text style={styles.subheaderText}>Travel time:</Text>
+            <Text style={styles.subheaderText}>From: {route.params.from} </Text>
+            <Text style={styles.subheaderText}>To: {route.params.to} </Text>
+            <Text style={styles.subheaderText}>
+              Travel time: {Math.floor(route.params.travelTime / 60)} minutes
+            </Text>
+            <Text style={styles.subheaderText}>
+              Travel mode: {route.params.travelMode}
+            </Text>
           </View>
           <View style={styles.mapContainer}>
             <MapView
@@ -49,12 +45,15 @@ export default class Transfer extends React.Component {
               provider={PROVIDER_GOOGLE}
               style={styles.map}
               initialRegion={{
-                latitude: 41.387364,
-                longitude: 2.1675071,
+                latitude: route.params.originMap.latitude,
+                longitude: route.params.originMap.longitude,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421,
               }}
-            ></MapView>
+            >
+              <Marker coordinate={route.params.toLocation} />
+              <Marker coordinate={route.params.fromLocation} />
+            </MapView>
           </View>
           <View style={styles.pricebuttonContainer}>
             <TouchableOpacity style={styles.priceButton}>
@@ -98,8 +97,8 @@ export default class Transfer extends React.Component {
           </View>
         </ScrollView>
       </View>
-    );
-  }
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
