@@ -51,8 +51,8 @@ export default function Transfer({ navigation, route }) {
                 longitudeDelta: 0.0421,
               }}
             >
-              <Marker coordinate={route.params.toLocation} />
-              <Marker coordinate={route.params.fromLocation} />
+              <Marker coordinate={route.params.toLocation} title={route.params.to} />
+              <Marker coordinate={route.params.fromLocation} title={route.params.from} />
             </MapView>
           </View>
           <View style={styles.pricebuttonContainer}>
