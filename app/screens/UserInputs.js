@@ -1,93 +1,91 @@
-import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  Button,
-} from "react-native";
-import { CheckBox, Card, CardItem } from "native-base";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { CheckBox } from "native-base";
 import DropDownPicker from "react-native-dropdown-picker";
-import DateTimePicker from "react-native-modal-datetime-picker";
-import moment from "moment";
 import Slider from "@react-native-community/slider";
 import GradientButton from "react-native-gradient-buttons";
+import TimePicker from "../components/TimePicker";
+import { useDispatch, useSelector } from "react-redux";
+import { loadCountries } from "../actions/countries";
+import { loadCities, loadCitiesfromCountry } from "../actions/cities";
 
-export default class UserInputs extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      country: null,
-      city: null,
-      timeArray: [],
-      budgetArray: [],
-      mobilityArray: [],
-      interestArray: [],
-      walk: false,
-      bike: false,
-      publicTransport: false,
-      privateTransport: false,
-      sightseeing: false,
-      museums: false,
-      barsandMusic: false,
-      nightlife: false,
-      isVisible: false,
-      chosenDate: "",
-      chosenHour: "",
-      chosenMinute: "",
-      isVisible2: false,
-      chosenDate2: "",
-      chosenHour2: "",
-      chosenMinute2: "",
-      sliderValue: 15,
-      originPoint: { latitude: 41.387364, longitude: 2.1675071 },
-    };
-  }
+const useGetStates = () => {
+  const citiesState = useSelector((state) => state.cities.cities);
+  const countriesState = useSelector((state) => state.countries.countries);
+  const citiesLoading = useSelector((state) => state.cities.loading);
+  const countriesLoading = useSelector((state) => state.countries.loading);
 
-  handlePicker = (datetime) => {
-    this.setState({
-      isVisible: false,
-      chosenDate: moment(datetime).format("MMMM, Do YYYY HH:mm"),
-      chosenHour: moment(datetime).format("HH"),
-      chosenMinute: moment(datetime).format("mm"),
-    });
+  return [citiesState, countriesState, citiesLoading, countriesLoading];
+};
+
+const loadMethods = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadCountries());
+  }, []);
+};
+
+
+const UserInputs = ({ navigation }) => {
+  const dispatch = useDispatch();
+
+  loadMethods();
+
+  useEffect(() => {
+    dispatch(loadCitiesfromCountry(country.id));
+  }, [country]);
+
+  const [country, setCountry] = useState(0);
+  const [city, setCity] = useState(null);
+  const [cities, countries, citiesLoading, countriesLoading] = useGetStates();
+
+  let timeArray = [];
+  let budgetArray = [];
+  let mobilityArray = [];
+  let interestArray = [];
+
+  const [walk, walkChecked] = useState(false);
+  const [bike, bikeChecked] = useState(false);
+  const [publicTransport, publicTransportChecked] = useState(false);
+  const [privateTransport, privateTransportChecked] = useState(false);
+
+  const [sightseeing, sightseeingChecked] = useState(false);
+  const [museums, museumsChecked] = useState(false);
+  const [barsandMusic, barsandMusicChecked] = useState(false);
+  const [nightlife, nightlifeChecked] = useState(false);
+
+  let startChosenDate = null;
+  let startChosenHour = null;
+  let startChosenMinute = null;
+
+  let endChosenDate = null;
+  let endChosenHour = null;
+  let endChosenMinute = null;
+
+  const [sliderValue, setSlider] = useState(15);
+
+  const [originPoint, setOriginPoint] = useState({
+    latitude: 41.387364,
+    longitude: 2.1675071,
+  });
+
+  const startTimeHandle = (datatime) => {
+    startChosenDate = datatime.chosenDate;
+    startChosenHour = datatime.chosenHour;
+    startChosenMinute = datatime.chosenMinute;
   };
 
-  hidePicker = () => {
-    this.setState({
-      isVisible: false,
-    });
+  const endTimeHandle = (datatime) => {
+    endChosenDate = datatime.chosenDate;
+    endChosenHour = datatime.chosenHour;
+    endChosenMinute = datatime.chosenMinute;
   };
 
-  showPicker = () => {
-    this.setState({ isVisible: true });
+  const modifyOriginPoint = (newPoint) => {
+    setOriginPoint(newPoint);
   };
 
-  handlePicker2 = (datetime) => {
-    this.setState({
-      isVisible2: false,
-      chosenDate2: moment(datetime).format("MMMM, Do YYYY HH:mm"),
-      chosenHour2: moment(datetime).format("HH"),
-      chosenMinute2: moment(datetime).format("mm"),
-    });
-  };
-
-  hidePicker2 = () => {
-    this.setState({
-      isVisible2: false,
-    });
-  };
-
-  showPicker2 = () => {
-    this.setState({ isVisible2: true });
-  };
-
-  originPointonChange = (value) => {
-    this.setState({ originPoint: value });
-  };
-
-  render() {
+  if (citiesLoading || countriesLoading) {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.scrollConatainer}>
@@ -99,25 +97,13 @@ export default class UserInputs extends React.Component {
               // TODO: Obtain countries from the server.
               // OPTIONAL: Show only countries with places.¡
               itemStyle={styles.dropDownItem}
-              items={[
-                { label: "United Kingdom", value: "uk" },
-                { label: "France", value: "france" },
-                { label: "Spain", value: "spain" },
-                { label: "United States", value: "us" },
-                { label: "Germany", value: "germany" },
-                { label: "Portugal", value: "portugal" },
-                { label: "Italy", value: "italy" },
-              ]}
-              defaultValue={this.state.country}
-              placeholder="Select a country"
+              items={[]}
+              defaultValue={country}
+              placeholder="Loading countries"
               textStyle={{
                 fontSize: 18,
               }}
-              onChangeItem={(item) =>
-                this.setState({
-                  country: item.value,
-                })
-              }
+              onChangeItem={(item) => setCountry(item.value)}
               // Searchbar inside the dropdown
               searchable={true}
               searchablePlaceholder="Search..."
@@ -136,31 +122,28 @@ export default class UserInputs extends React.Component {
               // OPTIONAL: Show only cities with places.
 
               itemStyle={styles.dropDownItem}
-              items={[
-                { label: "Barcelona", value: "barcelona" },
-                { label: "Madrid", value: "madrid" },
-                { label: "London", value: "london" },
-                { label: "Lisboa", value: "lisboa" },
-                { label: "Berlin", value: "berlin" },
-                { label: "Roma", value: "roma" },
-                { label: "Verona", value: "verona" },
-                { label: "Stuttgart", value: "stuttgart" },
-                { label: "Lyon", value: "lyon" },
-                { label: "Paris", value: "paris" },
-                { label: "Porto", value: "porto" },
-                { label: "Venecia", value: "venecia" },
-                { label: "Pisa", value: "pisa" },
-              ]}
-              defaultValue={this.state.city}
-              placeholder="Select a city"
+              items={[]}
+              /*items={[
+              { label: "Barcelona", value: "barcelona" },
+              { label: "Madrid", value: "madrid" },
+              { label: "London", value: "london" },
+              { label: "Lisboa", value: "lisboa" },
+              { label: "Berlin", value: "berlin" },
+              { label: "Roma", value: "roma" },
+              { label: "Verona", value: "verona" },
+              { label: "Stuttgart", value: "stuttgart" },
+              { label: "Lyon", value: "lyon" },
+              { label: "Paris", value: "paris" },
+              { label: "Porto", value: "porto" },
+              { label: "Venecia", value: "venecia" },
+              { label: "Pisa", value: "pisa" },
+            ]}*/
+              defaultValue={city}
+              placeholder="Loading cities"
               textStyle={{
                 fontSize: 18,
               }}
-              onChangeItem={(item) =>
-                this.setState({
-                  city: item.value,
-                })
-              }
+              onChangeItem={(item) => setCity(item.value)}
               // Searchbar inside the dropdown
               searchable={true}
               searchablePlaceholder="Search..."
@@ -187,17 +170,15 @@ export default class UserInputs extends React.Component {
                 impact
                 impactStyle="Light"
                 onPressAction={() =>
-                  this.props.navigation.navigate("Location", {
-                    point: this.state.originPoint,
-                    other: this.originPointonChange,
+                  navigation.navigate("Location", {
+                    point: originPoint,
+                    other: modifyOriginPoint,
                   })
                 }
               />
               <Text>
-                latitude:{" "}
-                {Math.round(this.state.originPoint.latitude * 1000) / 1000}{" "}
-                longitude:
-                {Math.round(this.state.originPoint.longitude * 1000) / 1000}
+                latitude: {Math.round(originPoint.latitude * 1000) / 1000}{" "}
+                longitude: {Math.round(originPoint.longitude * 1000) / 1000}
               </Text>
             </View>
           </View>
@@ -206,71 +187,37 @@ export default class UserInputs extends React.Component {
           <View>
             <Text style={styles.bodyText}>Time Slot</Text>
             <View style={styles.dateTimePickerContainer}>
-              <GradientButton
-                style={{ marginVertical: 8 }}
-                text="START"
-                textStyle={{ fontSize: 15 }}
+              <TimePicker
                 gradientBegin="green"
                 gradientEnd="#7cfc00"
-                gradientDirection="diagonal"
-                height={35}
-                width={175}
-                radius={4}
-                impact
-                impactStyle="Light"
-                onPressAction={this.showPicker}
+                mode="datetime"
+                onChange={startTimeHandle}
               />
-              <DateTimePicker
-                isVisible={this.state.isVisible}
-                onConfirm={this.handlePicker}
-                onCancel={this.hidePicker}
-                mode={"datetime"}
-                is24Hour={true}
-              ></DateTimePicker>
-              <Text>{this.state.chosenDate}</Text>
 
-              <GradientButton
-                style={{ marginVertical: 8 }}
-                text="END"
-                textStyle={{ fontSize: 15 }}
+              <TimePicker
                 gradientBegin="red"
                 gradientEnd="#800000"
-                gradientDirection="diagonal"
-                height={35}
-                width={175}
-                radius={4}
-                impact
-                impactStyle="Light"
-                onPressAction={this.showPicker2}
+                mode="time"
+                onChange={endTimeHandle}
               />
-              <DateTimePicker
-                isVisible={this.state.isVisible2}
-                onConfirm={this.handlePicker2}
-                onCancel={this.hidePicker2}
-                mode={"time"}
-                is24Hour={true}
-              ></DateTimePicker>
-              <Text>{this.state.chosenDate2}</Text>
             </View>
           </View>
 
           {/*--------------------------------- Budget selector ---------------------------------*/}
           <View>
             <Text style={styles.bodyText}>Budget</Text>
-            <Text style={{ paddingLeft: 30 }}>
-              Max price: {this.state.sliderValue} €
-            </Text>
+            <Text style={{ paddingLeft: 30 }}>Max price: {sliderValue} €</Text>
+
             <Slider
+              defaultValue={sliderValue}
               maximumValue={300}
               minimumValue={0}
               step={1}
               minimumTrackTintColor="orange"
               maximumTrackTintColor="grey"
               thumbTintColor="#00008b"
-              value={this.state.sliderValue}
-              onValueChange={(sliderValue) => this.setState({ sliderValue })}
-              style={{ width: 375, height: 50 }}
-            ></Slider>
+              onValueChange={(sliderValue) => setSlider(sliderValue)}
+            />
           </View>
 
           {/*--------------------------------- Mobility selector ---------------------------------*/}
@@ -283,12 +230,10 @@ export default class UserInputs extends React.Component {
               <View style={{ paddingLeft: 30 }}>
                 <View style={styles.checkboxContainer}>
                   <CheckBox
-                    checked={this.state.walk}
-                    onPress={() =>
-                      this.setState({
-                        walk: !this.state.walk,
-                      })
-                    }
+                    checked={walk}
+                    onPress={() => {
+                      walkChecked(!walk);
+                    }}
                     style={styles.checkboxInput}
                     checkedIcon="dot-circle-o"
                     uncheckedIcon="circle-o"
@@ -300,12 +245,10 @@ export default class UserInputs extends React.Component {
 
                 <View style={styles.checkboxContainer}>
                   <CheckBox
-                    checked={this.state.bike}
-                    onPress={() =>
-                      this.setState({
-                        bike: !this.state.bike,
-                      })
-                    }
+                    checked={bike}
+                    onPress={() => {
+                      bikeChecked(!bike);
+                    }}
                     style={styles.checkboxInput}
                     color="#00008b"
                   ></CheckBox>
@@ -314,12 +257,10 @@ export default class UserInputs extends React.Component {
 
                 <View style={styles.checkboxContainer}>
                   <CheckBox
-                    checked={this.state.publicTransport}
-                    onPress={() =>
-                      this.setState({
-                        publicTransport: !this.state.publicTransport,
-                      })
-                    }
+                    checked={publicTransport}
+                    onPress={() => {
+                      publicTransportChecked(!publicTransport);
+                    }}
                     style={styles.checkboxInput}
                     color="#00008b"
                   ></CheckBox>
@@ -328,12 +269,10 @@ export default class UserInputs extends React.Component {
 
                 <View style={styles.checkboxContainer}>
                   <CheckBox
-                    checked={this.state.privateTransport}
-                    onPress={() =>
-                      this.setState({
-                        privateTransport: !this.state.privateTransport,
-                      })
-                    }
+                    checked={privateTransport}
+                    onPress={() => {
+                      privateTransportChecked(!privateTransport);
+                    }}
                     style={styles.checkboxInput}
                     color="#00008b"
                   ></CheckBox>
@@ -353,11 +292,11 @@ export default class UserInputs extends React.Component {
               <View style={{ paddingLeft: 30 }}>
                 <View style={styles.checkboxContainer}>
                   <CheckBox
-                    checked={this.state.sightseeing}
+                    checked={sightseeing}
                     onPress={() => {
-                      this.setState({
-                        sightseeing: !this.state.sightseeing,
-                      });
+                      {
+                        sightseeingChecked(!sightseeing);
+                      }
                     }}
                     style={styles.checkboxInput}
                     color="#00008b"
@@ -367,12 +306,10 @@ export default class UserInputs extends React.Component {
 
                 <View style={styles.checkboxContainer}>
                   <CheckBox
-                    checked={this.state.museums}
-                    onPress={() =>
-                      this.setState({
-                        museums: !this.state.museums,
-                      })
-                    }
+                    checked={museums}
+                    onPress={() => {
+                      museumsChecked(!museums);
+                    }}
                     style={styles.checkboxInput}
                     color="#00008b"
                   ></CheckBox>
@@ -381,12 +318,10 @@ export default class UserInputs extends React.Component {
 
                 <View style={styles.checkboxContainer}>
                   <CheckBox
-                    checked={this.state.barsandMusic}
-                    onPress={() =>
-                      this.setState({
-                        barsandMusic: !this.state.barsandMusic,
-                      })
-                    }
+                    checked={barsandMusic}
+                    onPress={() => {
+                      barsandMusicChecked(!barsandMusic);
+                    }}
                     style={styles.checkboxInput}
                     color="#00008b"
                   ></CheckBox>
@@ -395,12 +330,10 @@ export default class UserInputs extends React.Component {
 
                 <View style={styles.checkboxContainer}>
                   <CheckBox
-                    checked={this.state.nightlife}
-                    onPress={() =>
-                      this.setState({
-                        nightlife: !this.state.nightlife,
-                      })
-                    }
+                    checked={nightlife}
+                    onPress={() => {
+                      nightlifeChecked(!nightlife);
+                    }}
                     style={styles.checkboxInput}
                     color="#00008b"
                   ></CheckBox>
@@ -427,52 +360,375 @@ export default class UserInputs extends React.Component {
             impactStyle="Light"
             onPressAction={() => {
               let mobility = [];
-              this.state.bike ? mobility.push("bicycling") : null;
-              this.state.walk ? mobility.push("walking") : null;
-              this.state.privateTransport ? mobility.push("driving") : null;
-              this.state.publicTransport ? mobility.push("transit") : null;
-              this.setState({
-                mobilityArray: mobility,
-              });
+              bike ? mobility.push("bicycling") : null;
+              walk ? mobility.push("walking") : null;
+              privateTransport ? mobility.push("driving") : null;
+              publicTransport ? mobility.push("transit") : null;
+
+              mobilityArray = mobility;
+
               let interest = [];
-              this.state.sightseeing ? interest.push(5) : null;
-              this.state.museums ? interest.push(0) : null;
-              this.state.barsandMusic ? interest.push(2) : null;
-              this.state.nightlife ? interest.push(3) : null;
-              this.setState(
-                {
-                  interestArray: interest,
-                },
-                () => {
-                  this.props.navigation.navigate("Selection", {
-                    country: this.state.country,
-                    city: this.state.city,
-                    typology: this.state.interestArray[0],
-                    travelmode: this.state.mobilityArray[0],
-                    userTimeHours: [
-                      Number.parseInt(this.state.chosenHour),
-                      Number.parseInt(this.state.chosenHour2),
-                    ],
-                    userTimeMinutes: [
-                      Number.parseInt(this.state.chosenMinute),
-                      Number.parseInt(this.state.chosenMinute2),
-                    ],
-                    originMap: this.state.originPoint,
-                    userBudget: this.state.sliderValue,
-                  });
-                }
-              );
+              sightseeing ? interest.push(5) : null;
+              museums ? interest.push(0) : null;
+              barsandMusic ? interest.push(2) : null;
+              nightlife ? interest.push(3) : null;
+              interestArray = interest;
+              navigation.navigate("Selection", {
+                country: country,
+                city: city,
+                typology: interestArray[0],
+                travelmode: mobilityArray[0],
+                userTimeHours: [
+                  Number.parseInt(startChosenHour),
+                  Number.parseInt(endChosenHour),
+                ],
+                userTimeMinutes: [
+                  Number.parseInt(startChosenMinute),
+                  Number.parseInt(endChosenMinute),
+                ],
+                originMap: originPoint,
+                userBudget: sliderValue,
+              });
             }}
           />
         </View>
       </View>
     );
   }
-}
+
+  return (
+    <View style={styles.container}>
+      <ScrollView style={styles.scrollConatainer}>
+        {/*--------------------------------- Countries dropdown ---------------------------------*/}
+        <View style={styles.inputContainer}>
+          <Text style={styles.bodyText}>Country</Text>
+          <DropDownPicker
+            style={styles.inputElement}
+            // TODO: Obtain countries from the server.
+            // OPTIONAL: Show only countries with places.¡
+            itemStyle={styles.dropDownItem}
+            items={countries.map((item) => {
+              let label = item.name;
+              let value = item.id;
+              return { label, value };
+            })}
+            /*
+            items={[
+              { label: "United Kingdom", value: "uk" },
+              { label: "France", value: "france" },
+              { label: "Spain", value: "spain" },
+              { label: "United States", value: "us" },
+              { label: "Germany", value: "germany" },
+              { label: "Portugal", value: "portugal" },
+              { label: "Italy", value: "italy" },
+            ]}*/
+            defaultValue={country}
+            placeholder="Select a country"
+            textStyle={{
+              fontSize: 18,
+            }}
+            onChangeItem={(item) => setCountry(item.value)}
+            // Searchbar inside the dropdown
+            searchable={true}
+            searchablePlaceholder="Search..."
+            searchablePlaceholderTextColor="gray"
+            searchableStyle={{}}
+            searchableError={() => <Text>Not Found</Text>}
+          />
+        </View>
+
+        {/*--------------------------------- Cities dropdown ---------------------------------*/}
+        <View style={styles.inputContainer}>
+          <Text style={styles.bodyText}>City</Text>
+          <DropDownPicker
+            style={styles.inputElement}
+            // TODO: Obtain cities from the server.
+            // OPTIONAL: Show only cities with places.
+
+            itemStyle={styles.dropDownItem}
+            items={cities.map((item) => {
+              let label = item.name;
+              let value = item.id;
+              return { label, value };
+            })}
+            /*items={[
+              { label: "Barcelona", value: "barcelona" },
+              { label: "Madrid", value: "madrid" },
+              { label: "London", value: "london" },
+              { label: "Lisboa", value: "lisboa" },
+              { label: "Berlin", value: "berlin" },
+              { label: "Roma", value: "roma" },
+              { label: "Verona", value: "verona" },
+              { label: "Stuttgart", value: "stuttgart" },
+              { label: "Lyon", value: "lyon" },
+              { label: "Paris", value: "paris" },
+              { label: "Porto", value: "porto" },
+              { label: "Venecia", value: "venecia" },
+              { label: "Pisa", value: "pisa" },
+            ]}*/
+            defaultValue={city}
+            placeholder="Select a city"
+            textStyle={{
+              fontSize: 18,
+            }}
+            onChangeItem={(item) => setCity(item.value)}
+            // Searchbar inside the dropdown
+            searchable={true}
+            searchablePlaceholder="Search..."
+            searchablePlaceholderTextColor="gray"
+            searchableStyle={{}}
+            searchableError={() => <Text>Not Found</Text>}
+          />
+        </View>
+
+        {/*--------------------------------- Location selector ---------------------------------*/}
+        <View>
+          <Text style={styles.bodyText}>Location</Text>
+          <View style={styles.dateTimePickerContainer}>
+            <GradientButton
+              style={{ marginVertical: 8 }}
+              text="PICK START POINT"
+              textStyle={{ fontSize: 13 }}
+              gradientBegin="#00008b"
+              gradientEnd="#00008b"
+              gradientDirection="diagonal"
+              height={32}
+              width={175}
+              radius={4}
+              impact
+              impactStyle="Light"
+              onPressAction={() =>
+                navigation.navigate("Location", {
+                  point: originPoint,
+                  other: modifyOriginPoint,
+                })
+              }
+            />
+            <Text>
+              latitude: {Math.round(originPoint.latitude * 1000) / 1000}{" "}
+              longitude: {Math.round(originPoint.longitude * 1000) / 1000}
+            </Text>
+          </View>
+        </View>
+
+        {/*--------------------------------- Time selector ---------------------------------*/}
+        <View>
+          <Text style={styles.bodyText}>Time Slot</Text>
+          <View style={styles.dateTimePickerContainer}>
+            <TimePicker
+              gradientBegin="green"
+              gradientEnd="#7cfc00"
+              mode="datetime"
+              onChange={startTimeHandle}
+            />
+
+            <TimePicker
+              gradientBegin="red"
+              gradientEnd="#800000"
+              mode="time"
+              onChange={endTimeHandle}
+            />
+          </View>
+        </View>
+
+        {/*--------------------------------- Budget selector ---------------------------------*/}
+        <View>
+          <Text style={styles.bodyText}>Budget</Text>
+          <Text style={{ paddingLeft: 30 }}>Max price: {sliderValue} €</Text>
+
+          <Slider
+            defaultValue={sliderValue}
+            maximumValue={300}
+            minimumValue={0}
+            step={1}
+            minimumTrackTintColor="orange"
+            maximumTrackTintColor="grey"
+            thumbTintColor="#00008b"
+            onValueChange={(sliderValue) => setSlider(sliderValue)}
+          />
+        </View>
+
+        {/*--------------------------------- Mobility selector ---------------------------------*/}
+        <View style={{ flexDirection: "row", paddingBottom: 10 }}>
+          <View>
+            <Text style={styles.leftTitle}>Mobility</Text>
+          </View>
+
+          <View style={{ paddingTop: 18 }}>
+            <View style={{ paddingLeft: 30 }}>
+              <View style={styles.checkboxContainer}>
+                <CheckBox
+                  checked={walk}
+                  onPress={() => {
+                    walkChecked(!walk);
+                  }}
+                  style={styles.checkboxInput}
+                  checkedIcon="dot-circle-o"
+                  uncheckedIcon="circle-o"
+                  checkedColor="red"
+                  color="#00008b"
+                ></CheckBox>
+                <Text>Walk</Text>
+              </View>
+
+              <View style={styles.checkboxContainer}>
+                <CheckBox
+                  checked={bike}
+                  onPress={() => {
+                    bikeChecked(!bike);
+                  }}
+                  style={styles.checkboxInput}
+                  color="#00008b"
+                ></CheckBox>
+                <Text>Bike</Text>
+              </View>
+
+              <View style={styles.checkboxContainer}>
+                <CheckBox
+                  checked={publicTransport}
+                  onPress={() => {
+                    publicTransportChecked(!publicTransport);
+                  }}
+                  style={styles.checkboxInput}
+                  color="#00008b"
+                ></CheckBox>
+                <Text>Public Transport</Text>
+              </View>
+
+              <View style={styles.checkboxContainer}>
+                <CheckBox
+                  checked={privateTransport}
+                  onPress={() => {
+                    privateTransportChecked(!privateTransport);
+                  }}
+                  style={styles.checkboxInput}
+                  color="#00008b"
+                ></CheckBox>
+                <Text>Private transport</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+
+        {/*--------------------------------- Interests selector ---------------------------------*/}
+        <View style={{ flexDirection: "row" }}>
+          <View>
+            <Text style={styles.leftTitle}>Interest</Text>
+          </View>
+
+          <View style={{ paddingTop: 18 }}>
+            <View style={{ paddingLeft: 30 }}>
+              <View style={styles.checkboxContainer}>
+                <CheckBox
+                  checked={sightseeing}
+                  onPress={() => {
+                    {
+                      sightseeingChecked(!sightseeing);
+                    }
+                  }}
+                  style={styles.checkboxInput}
+                  color="#00008b"
+                ></CheckBox>
+                <Text>Sightseeing</Text>
+              </View>
+
+              <View style={styles.checkboxContainer}>
+                <CheckBox
+                  checked={museums}
+                  onPress={() => {
+                    museumsChecked(!museums);
+                  }}
+                  style={styles.checkboxInput}
+                  color="#00008b"
+                ></CheckBox>
+                <Text>Museums</Text>
+              </View>
+
+              <View style={styles.checkboxContainer}>
+                <CheckBox
+                  checked={barsandMusic}
+                  onPress={() => {
+                    barsandMusicChecked(!barsandMusic);
+                  }}
+                  style={styles.checkboxInput}
+                  color="#00008b"
+                ></CheckBox>
+                <Text>Bars and Music</Text>
+              </View>
+
+              <View style={styles.checkboxContainer}>
+                <CheckBox
+                  checked={nightlife}
+                  onPress={() => {
+                    nightlifeChecked(!nightlife);
+                  }}
+                  style={styles.checkboxInput}
+                  color="#00008b"
+                ></CheckBox>
+                <Text>Nightlife and Party</Text>
+              </View>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+
+      {/*--------------------------------- Discover button ---------------------------------*/}
+      <View style={styles.containerButton}>
+        <GradientButton
+          style={{ marginVertical: 8 }}
+          text="DISCOVER"
+          textStyle={{ fontSize: 20 }}
+          gradientBegin="#00008b"
+          gradientEnd="#f5ba57"
+          gradientDirection="diagonal"
+          height={60}
+          width={300}
+          radius={15}
+          impact
+          impactStyle="Light"
+          onPressAction={() => {
+            let mobility = [];
+            bike ? mobility.push("bicycling") : null;
+            walk ? mobility.push("walking") : null;
+            privateTransport ? mobility.push("driving") : null;
+            publicTransport ? mobility.push("transit") : null;
+
+            mobilityArray = mobility;
+
+            let interest = [];
+            sightseeing ? interest.push(5) : null;
+            museums ? interest.push(0) : null;
+            barsandMusic ? interest.push(2) : null;
+            nightlife ? interest.push(3) : null;
+            interestArray = interest;
+            navigation.navigate("Selection", {
+              country: country,
+              city: city,
+              typology: interestArray[0],
+              travelmode: mobilityArray[0],
+              userTimeHours: [
+                Number.parseInt(startChosenHour),
+                Number.parseInt(endChosenHour),
+              ],
+              userTimeMinutes: [
+                Number.parseInt(startChosenMinute),
+                Number.parseInt(endChosenMinute),
+              ],
+              originMap: originPoint,
+              userBudget: sliderValue,
+            });
+          }}
+        />
+      </View>
+    </View>
+  );
+};
 
 {
   /*--------------------------------- Stylesheet ---------------------------------*/
 }
+
+export default UserInputs;
 
 const styles = StyleSheet.create({
   container: {

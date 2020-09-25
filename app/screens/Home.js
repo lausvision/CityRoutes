@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -8,23 +8,12 @@ import {
   Image,
 } from "react-native";
 import parisImage from "./img/paris_photo.jpg";
-import { loadCountries } from "../actions/countries";
-import { loadCities } from "../actions/cities";
-
-import { useDispatch } from "react-redux";
 
 const imageUri = Image.resolveAssetSource(parisImage).uri;
 
-const loadMethods = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(loadCountries());
-    dispatch(loadCities());
-  }, []);
-};
 
 const Home = ({ navigation }) => {
-  loadMethods();
+
 
   return (
     <View style={styles.container}>

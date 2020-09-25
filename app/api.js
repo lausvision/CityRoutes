@@ -1,6 +1,5 @@
 //Update .env file like "BASE_URL=http://serverpage:2739" to modify the server URL
 import { BASE_URL } from '@env'
-//let BASE_URL = "http://192.168.148.17:8080";
 
 const _apiCall = async (method, path, payload) => {
   let options = { method, mode: "cors" };
